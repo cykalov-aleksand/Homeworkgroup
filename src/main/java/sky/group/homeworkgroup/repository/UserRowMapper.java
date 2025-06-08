@@ -13,9 +13,9 @@ public class UserRowMapper implements RowMapper<InformationClient> {
         InformationClient informationClient=new InformationClient();
         informationClient.setId(UUID.fromString(rs.getString("id")));
         informationClient.setUser_id(UUID.fromString(rs.getString("user_id")));
-        informationClient.setTypeTransaction(rs.getString("type"));
+        informationClient.setTypeTransaction(rs.getString("transactions.type"));
         informationClient.setAmountTransaction(rs.getLong("amount"));
-        informationClient.setTypeProduct(rs.getString("type"));
+        informationClient.setTypeProduct(rs.getString("products.type"));
         informationClient.setNameProduct(rs.getString("name"));
         return informationClient;
 
