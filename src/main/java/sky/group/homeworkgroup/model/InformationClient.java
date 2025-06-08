@@ -1,6 +1,5 @@
 package sky.group.homeworkgroup.model;
 
-import java.sql.RowId;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -70,17 +69,5 @@ public class InformationClient {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "InformationClient{" +
-                "id=" + id +
-                ", user_id=" + user_id +
-                ", typeTransaction='" + typeTransaction + '\'' +
-                ", amountTransaction=" + amountTransaction +
-                ", typeProduct='" + typeProduct + '\'' +
-                ", nameProduct='" + nameProduct + '\'' +
-                '}';
     }
 }

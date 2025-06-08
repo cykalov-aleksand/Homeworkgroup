@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class UserRowMapper implements RowMapper<InformationClient> {
+    //читаем элементы столбцов
     @Override
     public InformationClient mapRow(ResultSet rs, int rowNum) throws SQLException {
         InformationClient informationClient=new InformationClient();

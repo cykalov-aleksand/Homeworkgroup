@@ -16,20 +16,13 @@ public class ProjectRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public String getRandomTransactionAmount(UUID user) {
-        String result = jdbcTemplate.queryForObject(
-                "SELECT USERNAME FROM USERS WHERE USERS.ID = ? LIMIT 1",
-                String.class, user);
-             return result;
-    }
-
-    public List<InformationClient> getTransactionAmount(UUID id) {
+    public List<InformationClient> getListTransactions(UUID id) {
         return jdbcTemplate.query(
                 "SELECT TRANSACTIONS.ID ,TRANSACTIONS.USER_ID, TRANSACTIONS.TYPE,TRANSACTIONS.AMOUNT," +
                         "PRODUCTS.TYPE,PRODUCTS.NAME FROM PRODUCTS INNER JOIN TRANSACTIONS ON " +
                         "TRANSACTIONS.PRODUCT_ID = PRODUCTS.ID WHERE USER_ID =?",
                 new UserRowMapper(), id);
-      }
+    }
 
 }
 
