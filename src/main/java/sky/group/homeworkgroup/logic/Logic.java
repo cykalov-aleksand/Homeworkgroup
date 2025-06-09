@@ -35,7 +35,6 @@ public class Logic {
             list.add(UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"));
         }
         return list;
-
     }
 
     private long numberOfReplenishmentOperations(UUID id, String type) {
