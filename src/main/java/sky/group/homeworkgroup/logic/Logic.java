@@ -16,7 +16,6 @@ public class Logic {
     public Logic(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
-
     public List<UUID> analise(UUID id) {
         List<UUID> list=new ArrayList<>();
         if ((numberOfReplenishmentOperations(id, "DEBIT") >= 1) && (numberOfReplenishmentOperations(id, "INVEST") == 0) &&
