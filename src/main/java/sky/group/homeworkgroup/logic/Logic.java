@@ -28,6 +28,7 @@ public class Logic {
                         (amountOfDebitTypeExpenses(id)))) {
             list.add(UUID.fromString("59efc529-2fff-41af-baff-90ccd7402925"));
         }
+
         if (numberOfLossOperations(id) == 0 &&
                 amountOfDepositsOfDebitType(id) > (amountOfDebitTypeExpenses(id))
                 && amountOfDebitTypeExpenses(id) > 100_000) {
