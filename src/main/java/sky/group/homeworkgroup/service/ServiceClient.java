@@ -28,7 +28,6 @@ public class ServiceClient {
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
 
     }
-
     private String textFile(String stroca) {
         BufferedReader reader = null;
         StringBuilder generalLine = new StringBuilder();
