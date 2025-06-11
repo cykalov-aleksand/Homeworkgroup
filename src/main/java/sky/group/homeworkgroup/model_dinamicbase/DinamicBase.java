@@ -1,10 +1,9 @@
 package sky.group.homeworkgroup.model_dinamicbase;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,24 +16,10 @@ public class DinamicBase {
         private UUID product_id;
         private String product_name;
         private String product_text;
-        private Boolean user_of;
-        private Boolean active_rules_of;
-        private Boolean transaction_sum_compare;
-        private Boolean transaction_sum_compare_deposit_withdraw;
+        @OneToMany(mappedBy = "rule_id")
+        private List<ModelRequest> modelRequests;
 
         public NotificationTask() {
-        }
-
-        public NotificationTask(Long id, UUID product_id, String product_name, String product_text, Boolean user_of,
-                                Boolean active_rules_of, Boolean transaction_sum_compare, Boolean transaction_sum_compare_deposit_withdraw) {
-            Id = id;
-            this.product_id = product_id;
-            this.product_name = product_name;
-            this.product_text = product_text;
-            this.user_of = user_of;
-            this.active_rules_of = active_rules_of;
-            this.transaction_sum_compare = transaction_sum_compare;
-            this.transaction_sum_compare_deposit_withdraw = transaction_sum_compare_deposit_withdraw;
         }
 
         public Long getId() {
@@ -69,36 +54,12 @@ public class DinamicBase {
             this.product_text = product_text;
         }
 
-        public Boolean getUser_of() {
-            return user_of;
+        public List<ModelRequest> getModelRequests() {
+            return modelRequests;
         }
 
-        public void setUser_of(Boolean user_of) {
-            this.user_of = user_of;
-        }
-
-        public Boolean getActive_rules_of() {
-            return active_rules_of;
-        }
-
-        public void setActive_rules_of(Boolean active_rules_of) {
-            this.active_rules_of = active_rules_of;
-        }
-
-        public Boolean getTransaction_sum_compare() {
-            return transaction_sum_compare;
-        }
-
-        public void setTransaction_sum_compare(Boolean transaction_sum_compare) {
-            this.transaction_sum_compare = transaction_sum_compare;
-        }
-
-        public Boolean getTransaction_sum_compare_deposit_withdraw() {
-            return transaction_sum_compare_deposit_withdraw;
-        }
-
-        public void setTransaction_sum_compare_deposit_withdraw(Boolean transaction_sum_compare_deposit_withdraw) {
-            this.transaction_sum_compare_deposit_withdraw = transaction_sum_compare_deposit_withdraw;
+        public void setModelRequests(List<ModelRequest> modelRequests) {
+            this.modelRequests = modelRequests;
         }
 
         @Override
