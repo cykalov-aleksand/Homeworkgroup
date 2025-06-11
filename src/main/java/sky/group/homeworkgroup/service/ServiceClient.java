@@ -26,6 +26,7 @@ public class ServiceClient {
         recommendedProducts.put(UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"), new OutputData(UUID.fromString(
                 "ab138afb-f3ba-4a93-b74f-0fcee86d447f"), "Простой кредит", textFile("text3.txt")));
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
+
     }
 
     private String textFile(String stroca) {
