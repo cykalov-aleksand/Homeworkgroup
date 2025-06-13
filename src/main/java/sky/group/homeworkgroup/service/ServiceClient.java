@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.logic.Logic;
 import sky.group.homeworkgroup.model.OutputData;
 
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,7 +17,9 @@ public class ServiceClient {
 
     public ServiceClient(Logic logic) {
         this.logic = logic;
-    }
+         }
+
+
 
     public List<OutputData> searchForRecommendations(UUID id) {
         Map<UUID, OutputData> recommendedProducts = new HashMap<>();
