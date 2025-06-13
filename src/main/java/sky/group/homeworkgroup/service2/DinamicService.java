@@ -13,7 +13,6 @@ public class DinamicService {
     public DinamicService(DinamicReposytory dinamicRepository) {
         this.dinamicRepository = dinamicRepository;
             }
-
     public Dinamic addDinamic(Dinamic argument){
     return dinamicRepository.save(argument);
      }
