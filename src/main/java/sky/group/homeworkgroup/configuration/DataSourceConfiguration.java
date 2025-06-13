@@ -22,7 +22,6 @@ public class DataSourceConfiguration {
         dataSource.setReadOnly(true);
         return dataSource;
     }
-
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate(
             @Qualifier("dataSource") DataSource dataSource
