@@ -23,6 +23,7 @@ public class DataSourceConfiguration {
         return dataSource;
     }
 
+
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate(
             @Qualifier("dataSource") DataSource dataSource
