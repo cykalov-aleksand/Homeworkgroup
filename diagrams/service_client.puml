@@ -1,0 +1,16 @@
+@startuml
+
+class ServiceClient {
+    - Logic logic
+    + ServiceClient(Logic logic)
+    + List<OutputData> searchForRecommendations(UUID id)
+    - String textFile(String stroca)
+}
+
+class Logic
+class OutputData
+
+ServiceClient --> Logic
+ServiceClient ..> OutputData
+
+@enduml

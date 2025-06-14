@@ -1,0 +1,10 @@
+@startuml
+
+ServiceClient.searchForRecommendations(id) {
+    Logic.analise(id)
+    recommendedProducts = new HashMap<UUID, OutputData>()
+    recommendedProducts.put(UUID, OutputData)
+    return recommendedProducts
+}
+
+@enduml
