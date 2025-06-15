@@ -4,12 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.group.homeworkgroup.model.OutputData;
-
-import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.service.ServiceClient;
-
-//import sky.group.homeworkgroup.service2.DinamicService;
-//import sky.group.homeworkgroup.service2.DinamicService;
 
 import java.util.List;
 import java.util.Optional;

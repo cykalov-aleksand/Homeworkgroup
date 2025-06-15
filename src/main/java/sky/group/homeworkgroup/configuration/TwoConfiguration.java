@@ -37,7 +37,7 @@ public class TwoConfiguration {
     @Primary
     @Bean(name = "bookingEntityManager")
     public LocalContainerEntityManagerFactoryBean myEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-               return builder
+        return builder
                 .dataSource(myDataSource())
                 .packages(Dinamic.class)
                 .build();
@@ -46,7 +46,6 @@ public class TwoConfiguration {
     @Primary
     @Bean(name = "bookingTransactionManager")
     public PlatformTransactionManager myTransactionManager(@Qualifier("bookingEntityManager") EntityManagerFactory entityManagerFactory) {
-        System.err.println("ERROR");
         return new JpaTransactionManager(entityManagerFactory);
     }
 
