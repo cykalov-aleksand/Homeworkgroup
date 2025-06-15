@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-
 import javax.sql.DataSource;
 
 
@@ -22,6 +21,7 @@ public class DataSourceConfiguration {
         dataSource.setReadOnly(true);
         return dataSource;
     }
+
 
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate(

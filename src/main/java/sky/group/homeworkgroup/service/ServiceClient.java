@@ -1,7 +1,7 @@
 package sky.group.homeworkgroup.service;
 
 import org.springframework.stereotype.Service;
-import sky.group.homeworkgroup.logic.Logic;
+import sky.group.homeworkgroup.service.logic.Logic;
 import sky.group.homeworkgroup.model.OutputData;
 
 
