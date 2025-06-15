@@ -30,7 +30,7 @@ public class DinamicService {
             try {
                 ruleRepository.save(variable);
                 ruleRepository.saveRule(dinamic.getId(), variable.getId());
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         return dinamic;
