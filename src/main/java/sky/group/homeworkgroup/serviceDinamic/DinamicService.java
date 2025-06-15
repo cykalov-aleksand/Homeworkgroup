@@ -8,6 +8,7 @@ import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -20,17 +21,24 @@ public class DinamicService {
     public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
-         }
+    }
 
     public Dinamic addDinamic(Dinamic argument) {
-       Dinamic dinamic=dinamicRepository.save(argument);
-        List<Rule> rule=dinamic.getRule().stream().map(ruleRepository::save).toList();
+        Dinamic dinamic = dinamicRepository.save(argument);
+        for (Rule variable : dinamic.getRule()) {
+            //SaveRule выбрасывает ошибку запрос не вернулся
+            try {
+                ruleRepository.save(variable);
+                ruleRepository.saveRule(dinamic.getId(), variable.getId());
+            } catch (Exception e) {
+            }
+        }
         return dinamic;
     }
 
-public void deleteRule(Long id){
-dinamicRepository.deleteById(id);
-}
+    public void deleteRule(Long id) {
+        dinamicRepository.deleteById(id);
     }
+}
 
 

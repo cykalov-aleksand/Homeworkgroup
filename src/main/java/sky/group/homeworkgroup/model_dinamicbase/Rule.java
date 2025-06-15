@@ -32,6 +32,14 @@ public class Rule {
         return Objects.hashCode(id);
     }
 
+    public Dinamic getDinam() {
+        return dinam;
+    }
+
+    public void setDinam(Dinamic dinam) {
+        this.dinam = dinam;
+    }
+
     public Long getId() {
         return id;
     }
@@ -62,5 +70,16 @@ public class Rule {
 
     public void setNegate(Boolean negate) {
         this.negate = negate;
+    }
+
+    @Override
+    public String toString() {
+        return "Rule{" +
+                "id=" + id +
+                ", dinam=" + dinam +
+                ", query='" + query + '\'' +
+                ", arguments=" + arguments +
+                ", negate=" + negate +
+                '}';
     }
 }

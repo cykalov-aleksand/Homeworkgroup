@@ -10,7 +10,7 @@ CREATE TABLE dinamic(
 
    -- changeset acycalov:2
    CREATE TABLE rule(
-          id SERIAL PRIMARY KEY,
+          id SERIAL,
           dinamic_id SERIAL REFERENCES dinamic(id),
           query TEXT,
           arguments TEXT[],
