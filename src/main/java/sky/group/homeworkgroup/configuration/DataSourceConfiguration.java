@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfiguration {
-
     @Bean(name = "dataSource")
     public DataSource dataSource(@Value("${application.recommendations-db.url}") String recommendationsUrl) {
         var dataSource = new HikariDataSource();
