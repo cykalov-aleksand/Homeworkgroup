@@ -1,4 +1,4 @@
-package sky.group.homeworkgroup.logic;
+package sky.group.homeworkgroup.service.logic;
 
 import org.springframework.stereotype.Component;
 import sky.group.homeworkgroup.model.InformationClient;
@@ -16,8 +16,9 @@ public class Logic {
     public Logic(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
+
     public List<UUID> analise(UUID id) {
-        List<UUID> list=new ArrayList<>();
+        List<UUID> list = new ArrayList<>();
         if ((numberOfReplenishmentOperations(id, "DEBIT") >= 1) && (numberOfReplenishmentOperations(id, "INVEST") == 0) &&
                 (amountOfInvestments(id, "SAVING") >= 1000)) {
             list.add(UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a"));

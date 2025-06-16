@@ -1,23 +1,22 @@
 package sky.group.homeworkgroup.model_dinamicbase;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
+
 @Entity
 public class Dinamic {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String product_id;
     private String product_name;
     private String product_text;
-    @OneToMany(mappedBy = "dinamic")
-    List<Rulle> rulle;
+    @OneToMany(mappedBy = "dinam")
+    private List<Rule> rule;
+
 
     public Dinamic() {
     }
@@ -32,6 +31,14 @@ public class Dinamic {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProduct_id() {
@@ -58,11 +65,11 @@ public class Dinamic {
         this.product_text = product_text;
     }
 
-    public List<Rulle> getRulle() {
-        return rulle;
+    public List<Rule> getRule() {
+        return rule;
     }
 
-    public void setRulle(List<Rulle> rulle) {
-        this.rulle = rulle;
+    public void setRule(List<Rule> rule) {
+        this.rule = rule;
     }
 }
