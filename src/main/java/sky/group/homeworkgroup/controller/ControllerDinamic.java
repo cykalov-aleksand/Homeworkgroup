@@ -8,6 +8,9 @@ import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.serviceDinamic.DinamicService;
 
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/rule")
 public class ControllerDinamic {
@@ -24,12 +27,16 @@ public class ControllerDinamic {
     }
 
     @DeleteMapping("{id}")
-    @Operation(summary = "Проводим удаление студента по заданному id")
+    @Operation(summary = "Проводим удаление рекомендаций по заданному id")
     public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
         dinamicService.deleteRule(id);
         return ResponseEntity.ok().build();
-
     }
+    @GetMapping
+    @Operation(summary = "Отображаем имеющиеся советы")
+    public List<Dinamic> AdviceAll() {
+        return dinamicService.allAdvice();
+            }
 }
 
 

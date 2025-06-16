@@ -3,13 +3,15 @@ package sky.group.homeworkgroup.dinamicrepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 
+import java.util.List;
+
 @Repository
 public interface DinamicReposytory extends JpaRepository<Dinamic, Long> {
-     @Query(value = "DELETE from dinamicBd.public.dinamic USING rule WHERE dinamic.id=3052",nativeQuery = true)
-     Void deleteLine(@Param("idDelete") Long id);
-
+     @Query(value = "DELETE from dinamic WHERE id= ?1",nativeQuery = true)
+     void deleteLine(Long id);
+@Query(value = "SELECT * FROM dinamic",nativeQuery = true)
+List<Dinamic> find();
     }

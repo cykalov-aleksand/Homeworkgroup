@@ -10,12 +10,11 @@ CREATE TABLE dinamic(
 
    -- changeset acycalov:2
    CREATE TABLE rule(
-          id SERIAL,
-          dinamic_id SERIAL REFERENCES dinamic(id),
+          id SERIAL PRIMARY KEY,
+          dinamic_id SERIAL REFERENCES dinamic(id) ON DELETE CASCADE,
           query TEXT,
           arguments TEXT[],
           negate Boolean);
-
 
 
 
