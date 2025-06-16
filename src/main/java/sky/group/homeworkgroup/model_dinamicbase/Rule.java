@@ -1,5 +1,6 @@
 package sky.group.homeworkgroup.model_dinamicbase;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -11,7 +12,7 @@ public class Rule {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
        private Long id;
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "dinamic_id",referencedColumnName = "id")
    Dinamic dinam;
     private String query;
@@ -35,7 +36,7 @@ public class Rule {
     public Dinamic getDinam() {
         return dinam;
     }
-
+    @JsonIgnore
     public void setDinam(Dinamic dinam) {
         this.dinam = dinam;
     }
