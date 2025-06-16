@@ -53,6 +53,7 @@ public class DinamicService {
         }
         public List<Dinamic> allAdvice(){
         return dinamicRepository.find();
+
         }
 }
 
