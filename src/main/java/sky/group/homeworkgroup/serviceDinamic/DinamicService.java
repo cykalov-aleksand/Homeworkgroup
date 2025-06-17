@@ -7,24 +7,28 @@ import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.dinamicrepository.DinamicReposytory;
 import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 
+import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.serviceDinamic.logic.LogicDinamic;
+//import sky.group.homeworkgroup.serviceDinamic.logic.Logic;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
 public class DinamicService {
+
     private final DinamicReposytory dinamicRepository;
     private final RuleRepository ruleRepository;
+    private final LogicDinamic logicDinamic;
 
 
-    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
+    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository, LogicDinamic logicDinamic) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
+        this.logicDinamic = logicDinamic;
     }
 
     Logger logger = LoggerFactory.getLogger(DinamicService.class);
@@ -45,7 +49,24 @@ public class DinamicService {
 
     public List<Dinamic> allAdvice() {
         return dinamicRepository.find();
+    }
+    public List<OutputData> searchForRecommendations(UUID id) {
+Map<Long,List<Rule>> mapRule=new HashMap<>();
+        System.out.println(dinamicRepository.idDinamic());
+        for(Long variable:dinamicRepository.idDinamic()){
+            mapRule.put(variable,ruleRepository.listRule(variable));
+        }
+        for (Map.Entry<Long, List<Rule>> contact: mapRule.entrySet()) {
+            logicDinamic.dverificationOfComplianceWith(id,contact.getValue());
+                    }
 
+
+
+
+
+
+List<OutputData>sss=new ArrayList<>();
+        return sss;
     }
 }
 

@@ -13,7 +13,7 @@ public class Dinamic {
     private Long id;
     private String product_id;
     private String product_name;
-    private String product_text;
+   private String product_text;
     @OneToMany(mappedBy = "dinam")
     private List<Rule> rule;
 
@@ -56,7 +56,7 @@ public class Dinamic {
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
     }
-
+@Lob
     public String getProduct_text() {
         return product_text;
     }
@@ -72,4 +72,5 @@ public class Dinamic {
     public void setRule(List<Rule> rule) {
         this.rule = rule;
     }
+
 }
