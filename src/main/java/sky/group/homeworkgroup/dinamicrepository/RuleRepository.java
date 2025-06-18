@@ -17,7 +17,12 @@ public interface RuleRepository extends JpaRepository<Rule,Long> {
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM rule WHERE dinamic_id = ?1",nativeQuery = true)
-    void deleteLine(Long id);
+    void deleteLineAllRule(Long id);
     @Query(value="SELECT r FROM Rule r JOIN r.dinam d WHERE d.id=?1")
           List<Rule>listRule(Long dinamicId);
+    @Transactional
+    @Modifying
+   @Query(value = "DELETE FROM rule WHERE id = ?1",nativeQuery = true)
+  void deleteLineRule(Long id);
+
    }

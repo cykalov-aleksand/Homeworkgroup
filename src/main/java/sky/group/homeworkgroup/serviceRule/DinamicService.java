@@ -1,4 +1,4 @@
-package sky.group.homeworkgroup.serviceDinamic;
+package sky.group.homeworkgroup.serviceRule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.dinamicrepository.DinamicReposytory;
 import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 
-import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
-import sky.group.homeworkgroup.serviceDinamic.logic.LogicDinamic;
-//import sky.group.homeworkgroup.serviceDinamic.logic.Logic;
+import sky.group.homeworkgroup.service.logic.LogicDinamic;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -33,7 +32,7 @@ public class DinamicService {
 
     Logger logger = LoggerFactory.getLogger(DinamicService.class);
 
-    public Dinamic addDinamic(Dinamic argument) {
+    public Dinamic addRule(Dinamic argument) {
         Dinamic dinamic = dinamicRepository.save(argument);
         for (Rule variable : dinamic.getRule()) {
             ruleRepository.save(variable);
@@ -41,33 +40,23 @@ public class DinamicService {
         }
         return dinamic;
     }
-
-    public void deleteRule(Long id) {
-        ruleRepository.deleteLine(id);
-        dinamicRepository.deleteLine(id);
-    }
-
-    public List<Dinamic> allAdvice() {
-        return dinamicRepository.find();
-    }
-    public List<OutputData> searchForRecommendations(UUID id) {
-Map<Long,List<Rule>> mapRule=new HashMap<>();
-        System.out.println(dinamicRepository.idDinamic());
-        for(Long variable:dinamicRepository.idDinamic()){
-            mapRule.put(variable,ruleRepository.listRule(variable));
+    public String deleteRule(Long idProduct, Long idRule) {
+        for (Rule variable : ruleRepository.listRule(idProduct)) {
+            if (idRule.equals(variable.getId())) {
+                ruleRepository.deleteLineRule(idRule);
+                return "Строка удалена";
+            }
         }
-        for (Map.Entry<Long, List<Rule>> contact: mapRule.entrySet()) {
-            logicDinamic.dverificationOfComplianceWith(id,contact.getValue());
-                    }
-
-
-
-
-
-
-List<OutputData>sss=new ArrayList<>();
-        return sss;
+        return "рекомендация с id=" + idRule + " не принадлежит продукту с Id= " + idRule;
     }
+
+      public List<Rule> allAdvice(Long idProduct) {
+          Map<Long, List<Rule>> mapRule = new HashMap<>();
+          for (Long variable : dinamicRepository.idDinamic()) {
+              mapRule.put(variable, ruleRepository.listRule(variable));
+          }
+          return mapRule.get(idProduct);
+      }
 }
 
 

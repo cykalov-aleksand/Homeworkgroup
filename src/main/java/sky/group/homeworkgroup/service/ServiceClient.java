@@ -1,9 +1,13 @@
 package sky.group.homeworkgroup.service;
 
 import org.springframework.stereotype.Service;
+import sky.group.homeworkgroup.dinamicrepository.DinamicReposytory;
+import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
+import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
+import sky.group.homeworkgroup.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.service.logic.Logic;
 import sky.group.homeworkgroup.model.OutputData;
-
+import sky.group.homeworkgroup.service.logic.LogicDinamic;
 
 
 import java.io.BufferedReader;
@@ -13,12 +17,17 @@ import java.util.*;
 
 @Service
 public class ServiceClient {
+    private final RuleRepository ruleRepository;
+    private final DinamicReposytory dinamicReposytory;
         private final Logic logic;
+    private final LogicDinamic logicDinamic;
 
-    public ServiceClient(Logic logic) {
+    public ServiceClient(RuleRepository ruleRepository, DinamicReposytory dinamicReposytory, Logic logic, LogicDinamic logicDinamic) {
+        this.ruleRepository = ruleRepository;
+        this.dinamicReposytory = dinamicReposytory;
         this.logic = logic;
-         }
-
+        this.logicDinamic = logicDinamic;
+    }
 
 
     public List<OutputData> searchForRecommendations(UUID id) {
@@ -53,6 +62,33 @@ public class ServiceClient {
             }
         }
         return generalLine.toString();
+    }
+    public void deleteRule(Long id) {
+        ruleRepository.deleteLineAllRule(id);
+        dinamicReposytory.deleteLine(id);
+    }
+    public Dinamic addDinamic(Dinamic argument) {
+        Dinamic dinamic = dinamicReposytory.save(argument);
+        for (Rule variable : dinamic.getRule()) {
+            ruleRepository.save(variable);
+            ruleRepository.saveRule(dinamic.getId(), variable.getId());
+        }
+        return dinamic;
+    }
+    public List<Dinamic> allAdvice() {
+        return dinamicReposytory.find();
+    }
+    public List<OutputData> searchForRecommendationsDinamic(UUID id) {
+        Map<Long, List<Rule>> mapRule = new HashMap<>();
+        System.out.println(dinamicReposytory.idDinamic());
+        for (Long variable : dinamicReposytory.idDinamic()) {
+            mapRule.put(variable, ruleRepository.listRule(variable));
+        }
+        for (Map.Entry<Long, List<Rule>> contact : mapRule.entrySet()) {
+            logicDinamic.dverificationOfComplianceWith(id, contact.getValue());
+        }
+        List<OutputData>sss=new ArrayList<>();
+        return sss;
     }
 }
 

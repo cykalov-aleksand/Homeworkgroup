@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
-import sky.group.homeworkgroup.model_dinamicbase.Rule;
 
 import java.util.List;
 

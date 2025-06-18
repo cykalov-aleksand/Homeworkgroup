@@ -1,9 +1,8 @@
-package sky.group.homeworkgroup.serviceDinamic.logic;
+package sky.group.homeworkgroup.service.logic;
 
 import org.springframework.stereotype.Component;
 import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
-import sky.group.homeworkgroup.serviceDinamic.DinamicService;
 
 import java.util.List;
 import java.util.UUID;
