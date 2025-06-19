@@ -60,7 +60,7 @@ public class DinamicService {
     public Dinamic addDinamic(Dinamic argument) {
         Dinamic dinamic = dinamicRepository.save(argument);
         for (Rule variable : dinamic.getRule()) {
-      ruleRepository.sss(variable.getArguments(),variable.getNegate(),variable.getQuery(),argument.getId());
+      ruleRepository.saveRile(variable.getArguments(),variable.getNegate(),variable.getQuery(),argument.getId());
                     }
         return dinamic;
     }

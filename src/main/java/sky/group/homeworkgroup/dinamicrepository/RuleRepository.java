@@ -27,6 +27,6 @@ public interface RuleRepository extends JpaRepository<Rule,Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO rule (arguments,negate,query,dinamic_id)VALUES (ARRAY [?1],?2,?3,?4)",nativeQuery = true)
-    void sss(List<String>arguments,Boolean negate,String query,Long dinamic);
+    void saveRile(List<String>arguments,Boolean negate,String query,Long dinamic);
 
    }
