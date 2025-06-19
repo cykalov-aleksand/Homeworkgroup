@@ -76,11 +76,13 @@ public class ServiceClient {
 
     public List<OutputData> searchForRecommendationsDinamic(UUID id) {
         Map<Long, List<Rule>> mapRule = new HashMap<>();
+        // Map содержит в качестве ключа id продукта в таблиц dinamic поле id, и поле Мар содержит список методов по данному продукту
           for (Long variable : dinamicReposytory.idDinamic()) {
             mapRule.put(variable, ruleRepository.listRule(variable));
         }
+          // Map содержит в качестве ключа id продукта в таблиц dinamic поле id, и поле Мар содержит список методов по данному продукту
         for (Map.Entry<Long, List<Rule>> contact : mapRule.entrySet()) {
-            System.err.println("для ID="+contact.getKey());
+            // в цикле проходим по каждому продукту и проводим обработку советов в методе logicDinamic.dverificationOfComplianceWith(id -пользователя, список условий
             logicDinamic.dverificationOfComplianceWith(id, contact.getValue());
 
         }
