@@ -16,7 +16,11 @@ public class LogicDinamic {
     }
 
     public Boolean dverificationOfComplianceWith(UUID client, List<Rule>condition){
-        System.out.println(condition);
+
+        for(Rule variable:condition){
+
+System.out.println(variable.getQuery());
+        }
         return true;
     }
 }

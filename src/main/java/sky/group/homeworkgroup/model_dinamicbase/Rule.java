@@ -80,7 +80,6 @@ public class Rule {
     public String toString() {
         return "Rule{" +
                 "id=" + id +
-                ", dinam=" + dinam +
                 ", query='" + query + '\'' +
                 ", arguments=" + arguments +
                 ", negate=" + negate +

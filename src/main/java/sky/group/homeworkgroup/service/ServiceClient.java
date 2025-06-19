@@ -19,7 +19,7 @@ import java.util.*;
 public class ServiceClient {
     private final RuleRepository ruleRepository;
     private final DinamicReposytory dinamicReposytory;
-        private final Logic logic;
+    private final Logic logic;
     private final LogicDinamic logicDinamic;
 
     public ServiceClient(RuleRepository ruleRepository, DinamicReposytory dinamicReposytory, Logic logic, LogicDinamic logicDinamic) {
@@ -41,6 +41,7 @@ public class ServiceClient {
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
 
     }
+
     private String textFile(String stroca) {
         BufferedReader reader = null;
         StringBuilder generalLine = new StringBuilder();
@@ -63,31 +64,27 @@ public class ServiceClient {
         }
         return generalLine.toString();
     }
+
     public void deleteRule(Long id) {
         ruleRepository.deleteLineAllRule(id);
         dinamicReposytory.deleteLine(id);
     }
-    public Dinamic addDinamic(Dinamic argument) {
-        Dinamic dinamic = dinamicReposytory.save(argument);
-        for (Rule variable : dinamic.getRule()) {
-            ruleRepository.save(variable);
-            ruleRepository.saveRule(dinamic.getId(), variable.getId());
-        }
-        return dinamic;
-    }
+
     public List<Dinamic> allAdvice() {
         return dinamicReposytory.find();
     }
+
     public List<OutputData> searchForRecommendationsDinamic(UUID id) {
         Map<Long, List<Rule>> mapRule = new HashMap<>();
-        System.out.println(dinamicReposytory.idDinamic());
-        for (Long variable : dinamicReposytory.idDinamic()) {
+          for (Long variable : dinamicReposytory.idDinamic()) {
             mapRule.put(variable, ruleRepository.listRule(variable));
         }
         for (Map.Entry<Long, List<Rule>> contact : mapRule.entrySet()) {
+            System.err.println("для ID="+contact.getKey());
             logicDinamic.dverificationOfComplianceWith(id, contact.getValue());
+
         }
-        List<OutputData>sss=new ArrayList<>();
+        List<OutputData> sss = new ArrayList<>();
         return sss;
     }
 }

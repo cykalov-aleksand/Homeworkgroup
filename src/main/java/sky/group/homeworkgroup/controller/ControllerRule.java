@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.serviceRule.DinamicService;
 
@@ -36,6 +37,11 @@ public class ControllerRule {
     @Operation(summary = "Отображаем имеющиеся советы по продукту с заданным id")
     public List<Rule> AdviceAll(@RequestParam("ID product") Long idProduct) {
         return dinamicService.allAdvice(idProduct);
+    }
+    @PostMapping
+    @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
+    public Dinamic createStudent(@RequestBody Dinamic dinamic) {
+        return dinamicService.addDinamic(dinamic);
     }
   }
 

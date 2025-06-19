@@ -32,11 +32,6 @@ public class ControllerServiceClient {
         return ResponseEntity.status(204).build();
 
     }
-    @PostMapping
-    @Operation(summary = "Принимаем POST запрос на добавление продукта")
-    public Dinamic createStudent(@RequestBody Dinamic dinamic) {
-        return serviceClients.addDinamic(dinamic);
-    }
     @GetMapping("/all")
     @Operation(summary = "Отображаем имеющиеся продукты")
     public List<Dinamic> AdviceAll() {
