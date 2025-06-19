@@ -21,6 +21,12 @@ public class Rule {
 
     public Rule() { }
 
+    public Rule(Dinamic dinam, String query, List<String> arguments, Boolean negate) {
+        this.dinam = dinam;
+        this.query = query;
+        this.arguments = arguments;
+        this.negate = negate;
+    }
 
     @Override
     public boolean equals(Object object) {
