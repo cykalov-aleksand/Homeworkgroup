@@ -64,4 +64,5 @@ public class Logic {
                         .equalsIgnoreCase("DEBIT")).filter(o -> !o.getTypeTransaction().equalsIgnoreCase("DEPOSIT"))
                 .mapToLong(InformationClient::getAmountTransaction).sum();
     }
+
 }
