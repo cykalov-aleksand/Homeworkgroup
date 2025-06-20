@@ -74,10 +74,7 @@ public class LogicDinamic {
 
     private Boolean analizingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
                                                                   String comparisonOperation, Boolean negate) {
-        System.out.println("\nТип запроса  TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW");
-        System.out.println("typeTransaction = " + typeTransaction);
-        System.out.println("comparisonOperation = " + comparisonOperation);
-        long deposit, withdraw;
+                long deposit, withdraw;
         deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
                 .filter(o -> o.getTypeTransaction().equalsIgnoreCase("DEPOSIT")).mapToLong(InformationClient::getAmountTransaction).sum();
         withdraw = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
