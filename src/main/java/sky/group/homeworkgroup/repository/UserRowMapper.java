@@ -20,4 +20,5 @@ public class UserRowMapper implements RowMapper<InformationClient> {
         informationClient.setNameProduct(rs.getString("name"));
         return informationClient;
     }
+
 }
