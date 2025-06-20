@@ -11,17 +11,6 @@ public class InformationClient {
     private String typeProduct;
     private String nameProduct;
 
-    //private final String debit;
-    //private final String deposit;
-    //private final int i;
-
-
-    //public InformationClient(String debit, String deposit, int i) {
-    //    super();
-    //    this.debit = debit;
-     //   this.deposit = deposit;
-    //    this.i = i;
-   // }
 
     public InformationClient() {
 
