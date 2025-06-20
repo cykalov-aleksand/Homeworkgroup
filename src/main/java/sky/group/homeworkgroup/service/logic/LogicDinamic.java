@@ -1,8 +1,9 @@
 package sky.group.homeworkgroup.service.logic;
 
 import org.springframework.stereotype.Component;
-import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
+import sky.group.homeworkgroup.model.InformationClient;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.repository.ProjectRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +12,10 @@ import java.util.UUID;
 
 @Component
 public class LogicDinamic {
-    private final RuleRepository ruleRepository;
+      private final ProjectRepository projectRepository;
 
-    public LogicDinamic(RuleRepository ruleRepository) {
-        this.ruleRepository = ruleRepository;
+    public LogicDinamic(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
     }
 
     public Boolean dverificationOfComplianceWith(UUID client, List<Rule> condition) {
@@ -25,65 +26,102 @@ public class LogicDinamic {
             List<String> list = convertingStringToList(variable.getArguments().get(0));
             switch (variable.getQuery().toUpperCase().trim()) {
                 case ("USER_OF"):
-                    listResult.add(analizingUserOf(list.get(0)));
+                    listResult.add(analizingUserOf(client, list.get(0), variable.getNegate()));
                     break;
                 case ("ACTIVE_USER_OF"):
-                    listResult.add(analizingActiveUserOf(list.get(0)));
+                    listResult.add(analizingActiveUserOf(client, list.get(0), variable.getNegate()));
                     break;
                 case ("TRANSACTION_SUM_COMPARE"):
                     listResult
-                            .add(analisingTransactionSumCompare(list.get(0), list.get(1), list.get(2), list.get(3)));
+                            .add(analisingTransactionSumCompare(client, list.get(0), list.get(1), list.get(2),
+                                    list.get(3), variable.getNegate()));
                     break;
                 case ("TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW"):
-                    listResult.add(analizingTransactionSumCompareDepositWithDraw(
-                            list.get(0), list.get(1)));
+                    listResult.add(analizingTransactionSumCompareDepositWithDraw(client, list.get(0), list.get(1),
+                            variable.getNegate()));
                     break;
             }
         }
-        for (int number = 0; number < listResult.size(); number++) {
-            resultat = listResult.get(number) && resultat;
+        for (Boolean aBoolean : listResult) {
+            resultat = aBoolean && resultat;
         }
         return resultat;
     }
 
-    private Boolean analizingUserOf(String typeTransaction) {
-        System.out.println("\nТип запроса  USER_OF");
-        System.out.println("typeTransaction = " + typeTransaction);
-        return true;
+    private Boolean analizingUserOf(UUID clientId, String typeTransaction, Boolean negate) {
+        boolean truthCheck;
+        truthCheck = projectRepository.getListTransactions(clientId).stream().anyMatch(o -> o.getTypeProduct()
+                .equalsIgnoreCase(typeTransaction));
+        return truthCheck == negate;
     }
 
-    private Boolean analizingActiveUserOf(String typeTransaction) {
-        System.out.println("\nТип запроса  ACTIVE_USER_OF");
-        System.out.println("typeTransaction = " + typeTransaction);
-
-        return true;
+    private Boolean analizingActiveUserOf(UUID clientId, String typeTransaction, Boolean negate) {
+        boolean truthCheck;
+        truthCheck = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
+                .equalsIgnoreCase(typeTransaction)).count() >= 5;
+        return truthCheck == negate;
     }
 
-    private Boolean analisingTransactionSumCompare(String typeProduct, String typeTransaction, String comparisonOperation, String stringNumber) {
-        System.out.println("\nТип запроса  TRANSACTION_SUM_COMPARE");
-        System.out.println("typeProduct = " + typeProduct);
-        System.out.println("tipeTransaction = " + typeTransaction);
-        System.out.println("comparisonOperation = " + comparisonOperation);
-        System.out.println("stringNumber = " + stringNumber);
-
-
-        return true;
+    private Boolean analisingTransactionSumCompare(UUID clientId, String typeProduct, String typeTransaction,
+                                                   String comparisonOperation, String stringNumber, Boolean negate) {
+        long number = Long.parseLong(stringNumber);
+        long amount = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
+                        .equalsIgnoreCase(typeProduct)).filter(o -> o.getTypeTransaction().equalsIgnoreCase(typeTransaction))
+                .mapToLong(InformationClient::getAmountTransaction).sum();
+        boolean truthCheck = compareNumber(comparisonOperation, amount, number);
+        return truthCheck == negate;
     }
 
-    private Boolean analizingTransactionSumCompareDepositWithDraw(String typeTransaction, String comparisonOperation) {
+    private Boolean analizingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
+                                                                  String comparisonOperation, Boolean negate) {
         System.out.println("\nТип запроса  TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW");
         System.out.println("typeTransaction = " + typeTransaction);
         System.out.println("comparisonOperation = " + comparisonOperation);
-        return true;
+        long deposit, withdraw;
+        deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
+                .filter(o -> o.getTypeTransaction().equalsIgnoreCase("DEPOSIT")).mapToLong(InformationClient::getAmountTransaction).sum();
+        withdraw = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
+                .filter(o -> o.getTypeTransaction().equalsIgnoreCase("WITHDRAW")).mapToLong(InformationClient::getAmountTransaction).sum();
+        boolean truthCheck = compareNumber(comparisonOperation, deposit, withdraw);
+        return truthCheck == negate;
     }
 
     private List<String> convertingStringToList(String string) {
-        String string1=string.replace("(","");
-        string=string1.replace(")","");
-        List<String>ss= Arrays.stream(string.split(",")).toList();
-        System.err.println(ss);
-        return ss;
+        String line = string.replace("(", "").replace(")", "");
+        return Arrays.stream(line.split(",")).toList();
+    }
+
+    private boolean compareNumber(String operator, long number1, long number2) {
+        switch (operator) {
+            case (">"):
+                if (number1 > number2) {
+                    return true;
+                }
+                break;
+            case ("<"):
+                if (number1 < number2) {
+                    return true;
+                }
+                break;
+            case ("<="):
+                if (number1 <= number2) {
+                    return true;
+                }
+                break;
+            case (">="):
+                if (number1 >= number2) {
+                    return true;
+                }
+                break;
+            case ("=="):
+                if (number1 == number2) {
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 }
+
 
 

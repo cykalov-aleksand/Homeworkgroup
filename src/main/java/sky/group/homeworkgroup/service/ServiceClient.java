@@ -76,18 +76,21 @@ public class ServiceClient {
 
     public List<OutputData> searchForRecommendationsDinamic(UUID id) {
         Map<Long, List<Rule>> mapRule = new HashMap<>();
+        List<OutputData> recommendedProducts = new ArrayList<>();
         // Map содержит в качестве ключа id продукта в таблиц dinamic поле id, и поле Мар содержит список методов по данному продукту
           for (Long variable : dinamicReposytory.idDinamic()) {
             mapRule.put(variable, ruleRepository.listRule(variable));
         }
-          // Map содержит в качестве ключа id продукта в таблиц dinamic поле id, и поле Мар содержит список методов по данному продукту
+          // Map содержит в качестве ключа id продукта в таблице dinamic поле id, и поле Мар содержит список методов по данному продукту
         for (Map.Entry<Long, List<Rule>> contact : mapRule.entrySet()) {
             // в цикле проходим по каждому продукту и проводим обработку советов в методе logicDinamic.dverificationOfComplianceWith(id -пользователя, список условий
-            logicDinamic.dverificationOfComplianceWith(id, contact.getValue());
-
+           if(logicDinamic.dverificationOfComplianceWith(id, contact.getValue())){
+             Dinamic element=dinamicReposytory.findId(contact.getKey());
+              recommendedProducts.add(new OutputData(UUID.fromString(element.getProduct_id()),element.getProduct_name(),
+                       element.getProduct_text()));
+           }
         }
-        List<OutputData> sss = new ArrayList<>();
-        return sss;
+       return recommendedProducts;
     }
 }
 

@@ -21,5 +21,7 @@ public interface DinamicReposytory extends JpaRepository<Dinamic, Long> {
     List<Dinamic> find();
     @Query(value="SELECT id FROM dinamic",nativeQuery = true)
  List<Long> idDinamic();
+ @Query(value = "SELECT * FROM dinamic WHERE id=?1", nativeQuery = true)
+ Dinamic findId(Long id);
 
 }
