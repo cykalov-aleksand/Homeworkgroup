@@ -13,13 +13,20 @@ public class Rule {
    @GeneratedValue(strategy = GenerationType.AUTO)
        private Long id;
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "dinamic_id",referencedColumnName = "id")
+   @JoinColumn(name = "dinamic_id")
    Dinamic dinam;
     private String query;
     private List<String> arguments;
     private Boolean negate;
 
     public Rule() { }
+
+    public Rule(Dinamic dinam, String query, List<String> arguments, Boolean negate) {
+        this.dinam = dinam;
+        this.query = query;
+        this.arguments = arguments;
+        this.negate = negate;
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -36,6 +43,7 @@ public class Rule {
     public Dinamic getDinam() {
         return dinam;
     }
+
     @JsonIgnore
     public void setDinam(Dinamic dinam) {
         this.dinam = dinam;
@@ -73,11 +81,11 @@ public class Rule {
         this.negate = negate;
     }
 
+
     @Override
     public String toString() {
         return "Rule{" +
                 "id=" + id +
-                ", dinam=" + dinam +
                 ", query='" + query + '\'' +
                 ", arguments=" + arguments +
                 ", negate=" + negate +
