@@ -5,8 +5,7 @@ CREATE TABLE dinamic(
     id SERIAL PRIMARY KEY,
     product_id TEXT,
     product_name TEXT,
-    product_text TEXT,
-    rule TEXT);
+    product_text TEXT);
 
    -- changeset acycalov:2
    CREATE TABLE rule(

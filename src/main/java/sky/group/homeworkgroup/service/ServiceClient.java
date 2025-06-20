@@ -1,9 +1,13 @@
 package sky.group.homeworkgroup.service;
 
 import org.springframework.stereotype.Service;
+import sky.group.homeworkgroup.dinamicrepository.DinamicReposytory;
+import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
+import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
+import sky.group.homeworkgroup.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.service.logic.Logic;
 import sky.group.homeworkgroup.model.OutputData;
-
+import sky.group.homeworkgroup.service.logic.LogicDinamic;
 
 
 import java.io.BufferedReader;
@@ -13,12 +17,17 @@ import java.util.*;
 
 @Service
 public class ServiceClient {
-        private final Logic logic;
+    private final RuleRepository ruleRepository;
+    private final DinamicReposytory dinamicReposytory;
+    private final Logic logic;
+    private final LogicDinamic logicDinamic;
 
-    public ServiceClient(Logic logic) {
+    public ServiceClient(RuleRepository ruleRepository, DinamicReposytory dinamicReposytory, Logic logic, LogicDinamic logicDinamic) {
+        this.ruleRepository = ruleRepository;
+        this.dinamicReposytory = dinamicReposytory;
         this.logic = logic;
-         }
-
+        this.logicDinamic = logicDinamic;
+    }
 
 
     public List<OutputData> searchForRecommendations(UUID id) {
@@ -32,6 +41,7 @@ public class ServiceClient {
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
 
     }
+
     private String textFile(String stroca) {
         BufferedReader reader = null;
         StringBuilder generalLine = new StringBuilder();
@@ -53,6 +63,34 @@ public class ServiceClient {
             }
         }
         return generalLine.toString();
+    }
+
+    public void deleteRule(Long id) {
+        ruleRepository.deleteLineAllRule(id);
+        dinamicReposytory.deleteLine(id);
+    }
+
+    public List<Dinamic> allAdvice() {
+        return dinamicReposytory.find();
+    }
+
+    public List<OutputData> searchForRecommendationsDinamic(UUID id) {
+        Map<Long, List<Rule>> mapRule = new HashMap<>();
+        List<OutputData> recommendedProducts = new ArrayList<>();
+        // Map содержит в качестве ключа id продукта в таблиц dinamic поле id, и поле Мар содержит список методов по данному продукту
+          for (Long variable : dinamicReposytory.idDinamic()) {
+            mapRule.put(variable, ruleRepository.listRule(variable));
+        }
+          // Map содержит в качестве ключа id продукта в таблице dinamic поле id, и поле Мар содержит список методов по данному продукту
+        for (Map.Entry<Long, List<Rule>> contact : mapRule.entrySet()) {
+            // в цикле проходим по каждому продукту и проводим обработку советов в методе logicDinamic.dverificationOfComplianceWith(id -пользователя, список условий
+           if(logicDinamic.dverificationOfComplianceWith(id, contact.getValue())){
+             Dinamic element=dinamicReposytory.findId(contact.getKey());
+              recommendedProducts.add(new OutputData(UUID.fromString(element.getProduct_id()),element.getProduct_name(),
+                       element.getProduct_text()));
+           }
+        }
+       return recommendedProducts;
     }
 }
 

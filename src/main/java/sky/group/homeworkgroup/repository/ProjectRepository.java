@@ -1,6 +1,7 @@
 package sky.group.homeworkgroup.repository;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import sky.group.homeworkgroup.model.InformationClient;
@@ -14,8 +15,10 @@ public class ProjectRepository {
 
     public ProjectRepository(@Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+
     }
 
+    @Cacheable(value = "transactions_cache", key = "#id")
     public List<InformationClient> getListTransactions(UUID id) {
         return jdbcTemplate.query(
                 "SELECT TRANSACTIONS.ID ,TRANSACTIONS.USER_ID, TRANSACTIONS.TYPE,TRANSACTIONS.AMOUNT," +
@@ -23,6 +26,4 @@ public class ProjectRepository {
                         "TRANSACTIONS.PRODUCT_ID = PRODUCTS.ID WHERE USER_ID =?",
                 new UserRowMapper(), id);
     }
-
 }
-
