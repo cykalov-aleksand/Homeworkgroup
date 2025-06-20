@@ -8,19 +8,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
 public class CacheConfig {
-
     @Bean
-    public CacheManager cacheManager() {
-        var caffeineCacheManager = new CaffeineCacheManager("exampleCache");
-        caffeineCacheManager.setCaffeine(
-                Caffeine.newBuilder()
-                        .expireAfterWrite(Duration.ofMinutes(10)) // Данные устаревают через 10 минут
-                        .maximumSize(100) // Максимум 100 записей
-        );
+    public Caffeine caffeineConfig() {
+        return Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES);
+    }
+    @Bean
+    public CacheManager cacheManager(Caffeine caffeine) {
+        CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
+        caffeineCacheManager.setCaffeine(caffeine);
         return caffeineCacheManager;
     }
 }
