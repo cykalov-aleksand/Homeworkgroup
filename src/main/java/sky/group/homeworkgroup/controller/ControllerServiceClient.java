@@ -18,13 +18,14 @@ public class ControllerServiceClient {
 
     public ControllerServiceClient(ServiceClient serviceClients) {
         this.serviceClients = serviceClients;
-         }
+    }
 
     @GetMapping("{user_Id}")
     @Operation(summary = "Вводим id клиента")
     public ResponseEntity<Optional<List<OutputData>>> getRecommendations(@PathVariable UUID user_Id) {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)));
     }
+
     @DeleteMapping("{id}")
     @Operation(summary = "Проводим удаление рекомендаций по заданному id продукта")
     public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
@@ -32,15 +33,17 @@ public class ControllerServiceClient {
         return ResponseEntity.status(204).build();
 
     }
+
     @GetMapping("/all")
     @Operation(summary = "Отображаем имеющиеся продукты")
     public List<Dinamic> AdviceAll() {
         return serviceClients.allAdvice();
     }
+
     @GetMapping("/dinamic/{user_Id}")
     @Operation(summary = "Вводим id клиента для динамического анализа")
     public ResponseEntity<Optional<List<OutputData>>> getRecommendationsDinamic(@PathVariable UUID user_Id) {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendationsDinamic(user_Id)));
     }
 
-      }
+}

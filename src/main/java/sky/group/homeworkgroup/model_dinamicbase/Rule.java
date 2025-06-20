@@ -9,17 +9,18 @@ import java.util.Objects;
 
 @Entity
 public class Rule {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-       private Long id;
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "dinamic_id")
-   Dinamic dinam;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dinamic_id")
+    Dinamic dinam;
     private String query;
     private List<String> arguments;
     private Boolean negate;
 
-    public Rule() { }
+    public Rule() {
+    }
 
     public Rule(Dinamic dinam, String query, List<String> arguments, Boolean negate) {
         this.dinam = dinam;
