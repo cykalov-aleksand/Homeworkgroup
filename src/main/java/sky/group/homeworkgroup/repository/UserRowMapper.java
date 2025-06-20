@@ -11,7 +11,7 @@ public class UserRowMapper implements RowMapper<InformationClient> {
     //читаем элементы столбцов
     @Override
     public InformationClient mapRow(ResultSet rs, int rowNum) throws SQLException {
-        InformationClient informationClient=new InformationClient();
+        InformationClient informationClient = new InformationClient();
         informationClient.setId(UUID.fromString(rs.getString("id")));
         informationClient.setUser_id(UUID.fromString(rs.getString("user_id")));
         informationClient.setTypeTransaction(rs.getString("transactions.type"));

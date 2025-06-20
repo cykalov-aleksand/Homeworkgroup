@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Component
 public class LogicDinamic {
-      private final ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
     public LogicDinamic(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
@@ -74,7 +74,7 @@ public class LogicDinamic {
 
     private Boolean analizingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
                                                                   String comparisonOperation, Boolean negate) {
-                long deposit, withdraw;
+        long deposit, withdraw;
         deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
                 .filter(o -> o.getTypeTransaction().equalsIgnoreCase("DEPOSIT")).mapToLong(InformationClient::getAmountTransaction).sum();
         withdraw = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))

@@ -40,6 +40,7 @@ public class DinamicService {
         }
         return dinamic;
     }
+
     public String deleteRule(Long idProduct, Long idRule) {
         for (Rule variable : ruleRepository.listRule(idProduct)) {
             if (idRule.equals(variable.getId())) {
@@ -50,18 +51,19 @@ public class DinamicService {
         return "рекомендация с id=" + idRule + " не принадлежит продукту с Id= " + idRule;
     }
 
-      public List<Rule> allAdvice(Long idProduct) {
-          Map<Long, List<Rule>> mapRule = new HashMap<>();
-          for (Long variable : dinamicRepository.idDinamic()) {
-              mapRule.put(variable, ruleRepository.listRule(variable));
-          }
-          return mapRule.get(idProduct);
-      }
+    public List<Rule> allAdvice(Long idProduct) {
+        Map<Long, List<Rule>> mapRule = new HashMap<>();
+        for (Long variable : dinamicRepository.idDinamic()) {
+            mapRule.put(variable, ruleRepository.listRule(variable));
+        }
+        return mapRule.get(idProduct);
+    }
+
     public Dinamic addDinamic(Dinamic argument) {
         Dinamic dinamic = dinamicRepository.save(argument);
         for (Rule variable : dinamic.getRule()) {
-      ruleRepository.saveRile(variable.getArguments(),variable.getNegate(),variable.getQuery(),argument.getId());
-                    }
+            ruleRepository.saveRile(variable.getArguments(), variable.getNegate(), variable.getQuery(), argument.getId());
+        }
         return dinamic;
     }
 }
