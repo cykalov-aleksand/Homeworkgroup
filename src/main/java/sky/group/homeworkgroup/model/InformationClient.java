@@ -75,4 +75,5 @@ public class InformationClient {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
