@@ -9,7 +9,7 @@ import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 
 import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
-import sky.group.homeworkgroup.service.logic.LogicDinamic;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,25 +21,15 @@ public class DinamicService {
 
     private final DinamicReposytory dinamicRepository;
     private final RuleRepository ruleRepository;
-    private final LogicDinamic logicDinamic;
 
 
-    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository, LogicDinamic logicDinamic) {
+    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
-        this.logicDinamic = logicDinamic;
     }
 
     Logger logger = LoggerFactory.getLogger(DinamicService.class);
 
-    public Dinamic addRule(Dinamic argument) {
-        Dinamic dinamic = dinamicRepository.save(argument);
-        for (Rule variable : dinamic.getRule()) {
-            ruleRepository.save(variable);
-            ruleRepository.saveRule(dinamic.getId(), variable.getId());
-        }
-        return dinamic;
-    }
 
     public String deleteRule(Long idProduct, Long idRule) {
         for (Rule variable : ruleRepository.listRule(idProduct)) {

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class CacheConfig {
     @Bean
     public Caffeine caffeineConfig() {
-        return Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES);
+        return Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).maximumSize(100);
     }
     @Bean
     public CacheManager cacheManager(Caffeine caffeine) {
