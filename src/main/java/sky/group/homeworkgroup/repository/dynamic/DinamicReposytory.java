@@ -1,11 +1,12 @@
-package sky.group.homeworkgroup.dinamicrepository;
+package sky.group.homeworkgroup.repository.dynamic;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
+import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface DinamicReposytory extends JpaRepository<Dinamic, Long> {
     /**
      * /*Создаем SQL запрос для удаления строки из таблицы dinamic с указанным id
      */
+    @Transactional
     @Modifying
     @Query(value = "DELETE from dinamic WHERE id= ?1", nativeQuery = true)
     void deleteLine(Long id);

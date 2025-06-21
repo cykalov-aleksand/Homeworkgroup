@@ -1,6 +1,5 @@
-package sky.group.homeworkgroup.model;
+package sky.group.homeworkgroup.model.modeljbd;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class InformationClient {

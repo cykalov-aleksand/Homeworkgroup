@@ -1,15 +1,16 @@
-package sky.group.homeworkgroup.dinamicrepository;
+package sky.group.homeworkgroup.repository.dynamic;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import sky.group.homeworkgroup.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 
 import java.util.List;
 
 public interface RuleRepository extends JpaRepository<Rule, Long> {
-      /**
+
+    /**
      * / * создаем SQL запрос для удаления строки с ячейкой dinamic_id равной id в таблице rule
      */
     @Transactional

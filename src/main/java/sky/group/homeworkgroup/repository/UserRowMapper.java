@@ -1,7 +1,7 @@
 package sky.group.homeworkgroup.repository;
 
 import org.springframework.jdbc.core.RowMapper;
-import sky.group.homeworkgroup.model.InformationClient;
+import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

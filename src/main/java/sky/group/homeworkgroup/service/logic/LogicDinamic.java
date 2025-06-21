@@ -1,8 +1,8 @@
 package sky.group.homeworkgroup.service.logic;
 
 import org.springframework.stereotype.Component;
-import sky.group.homeworkgroup.model.InformationClient;
-import sky.group.homeworkgroup.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.model.modeljbd.InformationClient;
+import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.repository.ProjectRepository;
 
 import java.util.ArrayList;

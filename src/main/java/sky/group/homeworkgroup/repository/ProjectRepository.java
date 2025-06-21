@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import sky.group.homeworkgroup.model.InformationClient;
+import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 
 import java.util.List;
 import java.util.UUID;

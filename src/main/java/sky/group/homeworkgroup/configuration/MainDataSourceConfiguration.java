@@ -12,14 +12,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
+import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 
 import javax.sql.DataSource;
 
 @EnableJpaRepositories(
         entityManagerFactoryRef = "bookingEntityManager",
         transactionManagerRef = "bookingTransactionManager",
-        basePackages = "sky.group.homeworkgroup.dinamicrepository")
+        basePackages = "sky.group.homeworkgroup.repository.dynamic")
 @Configuration
 public class MainDataSourceConfiguration {
     /**

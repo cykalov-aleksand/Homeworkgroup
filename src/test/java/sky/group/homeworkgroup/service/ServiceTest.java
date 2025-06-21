@@ -17,12 +17,12 @@ public class ServiceTest {
     @Mock
     private Logic logic;
 
-    private ServiceClient serviceClient;
+    private ClientService serviceClient;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        serviceClient = new ServiceClient(logic);
+        serviceClient = new ClientService(logic);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package sky.group.homeworkgroup.model_dinamicbase;
+package sky.group.homeworkgroup.model.model_dinamicbase;
 
 
 import jakarta.persistence.*;
@@ -11,13 +11,13 @@ public class Dinamic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String productId;
-    private String productName;
+    private String product_id;
+    private String product_name;
     /**
      * /* Используем аннотацию @Column для вставления в ячейку длинного текста
      */
     @Column(columnDefinition = "TEXT")
-    private String productText;
+    private String product_text;
     @OneToMany(mappedBy = "dinam")
     private List<Rule> rule;
 
@@ -45,28 +45,28 @@ public class Dinamic {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
-    public String getProductText() {
-        return productText;
+    public String getProduct_text() {
+        return product_text;
     }
 
-    public void setProductText(String productText) {
-        this.productText = productText;
+    public void setProduct_text(String product_text) {
+        this.product_text = product_text;
     }
 
     public List<Rule> getRule() {
@@ -81,9 +81,9 @@ public class Dinamic {
     public String toString() {
         return "Dinamic{" +
                 "id=" + id +
-                ", productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productText='" + productText + '\'' +
+                ", product_id='" + product_id + '\'' +
+                ", product_name='" + product_name + '\'' +
+                ", product_text='" + product_text + '\'' +
                 ", rule=" + rule +
                 '}';
     }
