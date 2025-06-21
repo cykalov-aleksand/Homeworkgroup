@@ -21,19 +21,26 @@ import javax.sql.DataSource;
         transactionManagerRef = "bookingTransactionManager",
         basePackages = "sky.group.homeworkgroup.dinamicrepository")
 @Configuration
-public class TwoConfiguration {
+public class MainDataSourceConfiguration {
+    /**
+     * Устанавливаем соединение с базой данных, параметры которой расположены в папке application.properties
+     * в строках начинающихся на spring.datasource
+     */
     @Primary
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource myDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/dinamicBd");
-        dataSource.setUsername("GroupWork");
-        dataSource.setPassword("123");
+        dataSource.setUrl("url");
+        dataSource.setUsername("username");
+        dataSource.setPassword("password");
         return dataSource;
     }
 
+    /**
+     * Производим настройку жизненного цикла нашего myEntityManagerFactory
+     */
     @Primary
     @Bean(name = "bookingEntityManager")
     public LocalContainerEntityManagerFactoryBean myEntityManagerFactory(EntityManagerFactoryBuilder builder) {
@@ -42,6 +49,9 @@ public class TwoConfiguration {
                 .packages(Dinamic.class)
                 .build();
     }
+    /**
+    /*определяем стратегию управления транзакциями
+      */
 
     @Primary
     @Bean(name = "bookingTransactionManager")

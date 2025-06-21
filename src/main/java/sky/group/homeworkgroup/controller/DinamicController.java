@@ -12,18 +12,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/recommendation")
-public class ControllerServiceClient {
+@RequestMapping("/dinamic")
+public class DinamicController {
     private final ServiceClient serviceClients;
 
-    public ControllerServiceClient(ServiceClient serviceClients) {
+    public DinamicController(ServiceClient serviceClients) {
         this.serviceClients = serviceClients;
-    }
-
-    @GetMapping("{user_Id}")
-    @Operation(summary = "Вводим id клиента")
-    public ResponseEntity<Optional<List<OutputData>>> getRecommendations(@PathVariable UUID user_Id) {
-        return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)));
     }
 
     @DeleteMapping("{id}")
@@ -33,10 +27,15 @@ public class ControllerServiceClient {
         return ResponseEntity.status(204).build();
 
     }
+    @PostMapping
+    @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
+    public Dinamic addProduct(@RequestBody Dinamic dinamic) {
+        return serviceClients.addDinamic(dinamic);
+    }
 
     @GetMapping("/all")
     @Operation(summary = "Отображаем имеющиеся продукты")
-    public List<Dinamic> AdviceAll() {
+    public List<Dinamic> adviceAll() {
         return serviceClients.allAdvice();
     }
 
@@ -46,4 +45,4 @@ public class ControllerServiceClient {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendationsDinamic(user_Id)));
     }
 
-}
+  }

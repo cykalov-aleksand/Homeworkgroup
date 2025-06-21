@@ -49,13 +49,6 @@ public class DinamicService {
         return mapRule.get(idProduct);
     }
 
-    public Dinamic addDinamic(Dinamic argument) {
-        Dinamic dinamic = dinamicRepository.save(argument);
-        for (Rule variable : dinamic.getRule()) {
-            ruleRepository.saveRile(variable.getArguments(), variable.getNegate(), variable.getQuery(), argument.getId());
-        }
-        return dinamic;
-    }
-}
+   }
 
 

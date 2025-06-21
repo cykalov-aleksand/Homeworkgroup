@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rule")
-public class ControllerRule {
+public class RuleController {
     private final DinamicService dinamicService;
 
-    public ControllerRule(DinamicService dinamicService) {
+    public RuleController(DinamicService dinamicService) {
         this.dinamicService = dinamicService;
     }
 
@@ -39,11 +39,6 @@ public class ControllerRule {
         return dinamicService.allAdvice(idProduct);
     }
 
-    @PostMapping
-    @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
-    public Dinamic createStudent(@RequestBody Dinamic dinamic) {
-        return dinamicService.addDinamic(dinamic);
-    }
 }
 
 

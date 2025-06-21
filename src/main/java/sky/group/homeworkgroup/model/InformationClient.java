@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class InformationClient {
     private UUID id;
-    private UUID user_id;
+    private UUID userId;
     private String typeTransaction;
     private long amountTransaction;
     private String typeProduct;
@@ -24,12 +24,12 @@ public class InformationClient {
         this.id = id;
     }
 
-    public UUID getUser_id() {
-        return user_id;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUser_id(UUID user_id) {
-        this.user_id = user_id;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getTypeTransaction() {
@@ -62,18 +62,6 @@ public class InformationClient {
 
     public void setNameProduct(String nameProduct) {
         this.nameProduct = nameProduct;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof InformationClient that)) return false;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 
 }

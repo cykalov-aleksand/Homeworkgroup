@@ -11,10 +11,13 @@ public class Dinamic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String product_id;
-    private String product_name;
+    private String productId;
+    private String productName;
+    /**
+     /* Используем аннотацию @Column для вставления в ячейку длинного текста
+     */
     @Column(columnDefinition =  "TEXT")
-     private String product_text;
+     private String productText;
     @OneToMany(mappedBy = "dinam")
     private List<Rule> rule;
 
@@ -42,28 +45,28 @@ public class Dinamic {
         this.id = id;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProduct_text() {
-        return product_text;
+    public String getProductText() {
+        return productText;
     }
 
-    public void setProduct_text(String product_text) {
-        this.product_text = product_text;
+    public void setProductText(String productText) {
+        this.productText = productText;
     }
 
     public List<Rule> getRule() {
@@ -78,9 +81,9 @@ public class Dinamic {
     public String toString() {
         return "Dinamic{" +
                 "id=" + id +
-                ", product_id='" + product_id + '\'' +
-                ", product_name='" + product_name + '\'' +
-                ", product_text='" + product_text + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productText='" + productText + '\'' +
                 ", rule=" + rule +
                 '}';
     }
