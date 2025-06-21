@@ -73,6 +73,7 @@ public class ServiceClient {
     public List<Dinamic> allAdvice() {
         return dinamicReposytory.find();
     }
+
     public Dinamic addDinamic(Dinamic argument) {
         Dinamic dinamic = dinamicReposytory.save(argument);
         for (Rule variable : dinamic.getRule()) {

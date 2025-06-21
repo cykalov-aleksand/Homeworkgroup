@@ -21,9 +21,10 @@ public class SuggestionsForClientController {
     public SuggestionsForClientController(ServiceClient serviceClients) {
         this.serviceClients = serviceClients;
     }
+
     @GetMapping("{user_Id}")
     @Operation(summary = "Вводим id клиента")
     public ResponseEntity<Optional<List<OutputData>>> getRecommendations(@PathVariable UUID user_Id) {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)));
     }
-   }
+}

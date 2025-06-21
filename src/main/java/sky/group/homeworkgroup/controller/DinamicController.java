@@ -27,6 +27,7 @@ public class DinamicController {
         return ResponseEntity.status(204).build();
 
     }
+
     @PostMapping
     @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
     public Dinamic addProduct(@RequestBody Dinamic dinamic) {
@@ -45,4 +46,4 @@ public class DinamicController {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendationsDinamic(user_Id)));
     }
 
-  }
+}

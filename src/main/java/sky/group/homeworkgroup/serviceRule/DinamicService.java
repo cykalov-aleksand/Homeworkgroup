@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.dinamicrepository.DinamicReposytory;
 import sky.group.homeworkgroup.dinamicrepository.RuleRepository;
 
-import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model_dinamicbase.Rule;
 
 
@@ -49,6 +48,6 @@ public class DinamicService {
         return mapRule.get(idProduct);
     }
 
-   }
+}
 
 

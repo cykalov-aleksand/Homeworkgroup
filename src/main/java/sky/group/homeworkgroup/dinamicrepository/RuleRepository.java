@@ -9,34 +9,30 @@ import sky.group.homeworkgroup.model_dinamicbase.Rule;
 import java.util.List;
 
 public interface RuleRepository extends JpaRepository<Rule, Long> {
-    /**
-     /* создаем SQL запрос для записи элемента idRule в ячейку dinamic_id с указанным idDinamic
-     */
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE rule SET dinamic_id = ?1 WHERE id = ?2", nativeQuery = true)
-    void saveRule(Long idDinamic, Long idRule);
-    /**
-     / * создаем SQL запрос для удаления строки с ячейкой dinamic_id равной id в таблице rule
+      /**
+     * / * создаем SQL запрос для удаления строки с ячейкой dinamic_id равной id в таблице rule
      */
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM rule WHERE dinamic_id = ?1", nativeQuery = true)
     void deleteLineAllRule(Long id);
+
     /**
-     /* создаем JSON SQL запрос для вывода списка объектов Rule с ячейками dinamic_id равными dinamicId
+     * /* создаем JSON SQL запрос для вывода списка объектов Rule с ячейками dinamic_id равными dinamicId
      */
     @Query(value = "SELECT r FROM Rule r JOIN r.dinam d WHERE d.id=?1")
     List<Rule> listRule(Long dinamicId);
+
     /**
-     /* Создаем SQL запрос для удаления строки из таблицы rule с ячейкой id равной id
+     * /* Создаем SQL запрос для удаления строки из таблицы rule с ячейкой id равной id
      */
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM rule WHERE id = ?1", nativeQuery = true)
     void deleteLineRule(Long id);
+
     /**
-     /* Создаем SQL запрос для добавления строки с нижеуказанными параметрами
+     * /* Создаем SQL запрос для добавления строки с нижеуказанными параметрами
      */
     @Transactional
     @Modifying

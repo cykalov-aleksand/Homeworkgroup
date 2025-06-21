@@ -14,10 +14,10 @@ public class Dinamic {
     private String productId;
     private String productName;
     /**
-     /* Используем аннотацию @Column для вставления в ячейку длинного текста
+     * /* Используем аннотацию @Column для вставления в ячейку длинного текста
      */
-    @Column(columnDefinition =  "TEXT")
-     private String productText;
+    @Column(columnDefinition = "TEXT")
+    private String productText;
     @OneToMany(mappedBy = "dinam")
     private List<Rule> rule;
 

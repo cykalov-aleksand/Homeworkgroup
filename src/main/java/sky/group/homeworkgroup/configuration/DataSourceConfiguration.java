@@ -13,10 +13,10 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfiguration {
     /**
-     /* Устанавливаем соединение с базой данных, параметры которой расположены в папке application.properties
+     * / Устанавливаем соединение с базой данных, параметры которой расположены в папке application.properties
      */
     @Bean(name = "dataSource")
-        public DataSource dataSource(@Value("${application.recommendations-db.url}") String recommendationsUrl) {
+    public DataSource dataSource(@Value("${application.recommendations-db.url}") String recommendationsUrl) {
         var dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(recommendationsUrl);
         dataSource.setDriverClassName("org.h2.Driver");
@@ -25,8 +25,8 @@ public class DataSourceConfiguration {
     }
 
     /**
-     /* Устанавливаем шаблон взаимодействия JDBC с базой данных H2
-          */
+     * / Устанавливаем шаблон взаимодействия JDBC с базой данных H2
+     */
     @Bean(name = "jdbcTemplate")
     public JdbcTemplate jdbcTemplate(
             @Qualifier("dataSource") DataSource dataSource
