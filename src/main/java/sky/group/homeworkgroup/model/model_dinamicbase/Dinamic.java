@@ -10,7 +10,7 @@ public class Dinamic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false, name = "productId")
+    @Column(nullable = false, name = "product_id")
     private String productId;
     @Column(nullable = false, name = "product_name")
     private String productName;
