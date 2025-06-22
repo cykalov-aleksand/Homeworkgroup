@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class UserRowMapper implements RowMapper<InformationClient> {
     /**
-     *  Производим запись информации выведенной с JOIN запроса в модель InformationClient
+     * Производим запись информации выведенной с JOIN запроса в модель InformationClient
      */
     @Override
     public InformationClient mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Rule {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dinamic_id")

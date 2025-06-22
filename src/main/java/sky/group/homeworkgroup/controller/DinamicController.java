@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
+import sky.group.homeworkgroup.model.model_dinamicbase.DynamicRecord;
 import sky.group.homeworkgroup.service.request.DinamicService;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class DinamicController {
 
     @PostMapping
     @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
-    public Dinamic addProduct(@RequestBody Dinamic dinamic) {
-        return dinamicService.addDinamic(dinamic);
+    public Dinamic addProduct(@RequestBody DynamicRecord dinamic) {
+        return dinamicService.addDinamic(new Dinamic(dinamic.productId(), dinamic.productName(), dinamic.text(), dinamic.rule()));
     }
 
     @GetMapping("/all")
@@ -36,4 +37,5 @@ public class DinamicController {
     public List<Dinamic> adviceAll() {
         return dinamicService.allAdvice();
     }
+
 }

@@ -34,8 +34,8 @@ public class DinamicClientService {
             // в цикле проходим по каждому продукту и проводим обработку советов в методе logicDinamic.dverificationOfComplianceWith(id -пользователя, список условий
             if (logicDinamic.dverificationOfComplianceWith(id, contact.getValue())) {
                 Dinamic element = dinamicReposytory.findId(contact.getKey());
-                recommendedProducts.add(new OutputData(UUID.fromString(element.getProduct_id()), element.getProduct_name(),
-                        element.getProduct_text()));
+                recommendedProducts.add(new OutputData(UUID.fromString(element.getProductId()), element.getProductName(),
+                        element.getProductText()));
             }
         }
         return recommendedProducts;
