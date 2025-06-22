@@ -50,7 +50,7 @@ public class MainDataSourceConfiguration {
                 .build();
     }
     /**
-    /*определяем стратегию управления транзакциями
+    * Определяем стратегию управления транзакциями
       */
 
     @Primary

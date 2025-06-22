@@ -14,7 +14,7 @@ public class Dinamic {
     private String product_id;
     private String product_name;
     /**
-     * /* Используем аннотацию @Column для вставления в ячейку длинного текста
+     * Используем аннотацию @Column для вставления в ячейку длинного текста
      */
     @Column(columnDefinition = "TEXT")
     private String product_text;

@@ -18,7 +18,9 @@ public class ProjectRepository {
         this.jdbcTemplate = jdbcTemplate;
 
     }
-
+    /**
+     *  создаем JSON SQL запрос для вывода списка объектов InformationClient с ячейками iser_id равными id
+     */
     @Cacheable(value = "transactions_cache", key = "#id")
     public List<InformationClient> getListTransactions(UUID id) {
         return jdbcTemplate.query(

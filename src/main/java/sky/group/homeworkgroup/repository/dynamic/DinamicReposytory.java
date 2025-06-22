@@ -14,7 +14,7 @@ import java.util.List;
 public interface DinamicReposytory extends JpaRepository<Dinamic, Long> {
 
     /**
-     * /*Создаем SQL запрос для удаления строки из таблицы dinamic с указанным id
+     * Создаем SQL запрос для удаления строки из таблицы dinamic с указанным id
      */
     @Transactional
     @Modifying
@@ -28,7 +28,7 @@ public interface DinamicReposytory extends JpaRepository<Dinamic, Long> {
     List<Dinamic> find();
 
     /**
-     * Создаем SQL запрос для вывода списка эдементов id из таблицы dinamic
+     * Создаем SQL запрос для вывода списка элементов id из таблицы dinamic
      */
     @Query(value = "SELECT id FROM dinamic", nativeQuery = true)
     List<Long> idDinamic();
