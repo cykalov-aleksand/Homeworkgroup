@@ -1,8 +1,7 @@
-package sky.group.homeworkgroup.model_dinamicbase;
+package sky.group.homeworkgroup.model.model_dinamicbase;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
-
 
 import java.util.List;
 import java.util.Objects;
@@ -22,13 +21,6 @@ public class Rule {
     public Rule() {
     }
 
-    public Rule(Dinamic dinam, String query, List<String> arguments, Boolean negate) {
-        this.dinam = dinam;
-        this.query = query;
-        this.arguments = arguments;
-        this.negate = negate;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -39,15 +31,6 @@ public class Rule {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    public Dinamic getDinam() {
-        return dinam;
-    }
-
-    @JsonIgnore
-    public void setDinam(Dinamic dinam) {
-        this.dinam = dinam;
     }
 
     public Long getId() {
@@ -81,7 +64,6 @@ public class Rule {
     public void setNegate(Boolean negate) {
         this.negate = negate;
     }
-
 
     @Override
     public String toString() {

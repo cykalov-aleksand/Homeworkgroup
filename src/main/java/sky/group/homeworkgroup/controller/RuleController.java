@@ -5,27 +5,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import sky.group.homeworkgroup.model_dinamicbase.Dinamic;
-import sky.group.homeworkgroup.model_dinamicbase.Rule;
-import sky.group.homeworkgroup.serviceRule.DinamicService;
+import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.service.request.RuleService;
 
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/rule")
-public class ControllerRule {
-    private final DinamicService dinamicService;
+public class RuleController {
+    private final RuleService ruleService;
 
-    public ControllerRule(DinamicService dinamicService) {
-        this.dinamicService = dinamicService;
+    public RuleController(RuleService ruleService) {
+        this.ruleService = ruleService;
     }
-
 
     @DeleteMapping("/delete")
     @Operation(summary = "Проводим удаление рекомендаций с id совета из продукта по заданному id продукта")
     public ResponseEntity<String> deleteRule(@RequestParam("ID product") Long idProduct, @RequestParam("ID rule") Long idRule) {
-        String result = dinamicService.deleteRule(idProduct, idRule);
+        String result = ruleService.deleteRule(idProduct, idRule);
         if (result.equals("Строка удалена")) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {
@@ -36,13 +34,7 @@ public class ControllerRule {
     @GetMapping("/allRule")
     @Operation(summary = "Отображаем имеющиеся советы по продукту с заданным id")
     public List<Rule> AdviceAll(@RequestParam("ID product") Long idProduct) {
-        return dinamicService.allAdvice(idProduct);
-    }
-
-    @PostMapping
-    @Operation(summary = "Принимаем POST запрос на добавление продукта, он же на изменение совета")
-    public Dinamic createStudent(@RequestBody Dinamic dinamic) {
-        return dinamicService.addDinamic(dinamic);
+        return ruleService.allAdvice(idProduct);
     }
 }
 

@@ -1,8 +1,8 @@
 package sky.group.homeworkgroup.service.logic;
 
 import org.springframework.stereotype.Component;
-import sky.group.homeworkgroup.model.InformationClient;
-import sky.group.homeworkgroup.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.model.modeljbd.InformationClient;
+import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.repository.ProjectRepository;
 
 import java.util.ArrayList;
@@ -26,18 +26,18 @@ public class LogicDinamic {
             List<String> list = convertingStringToList(variable.getArguments().get(0));
             switch (variable.getQuery().toUpperCase().trim()) {
                 case ("USER_OF"):
-                    listResult.add(analizingUserOf(client, list.get(0), variable.getNegate()));
+                    listResult.add(analyzingUserOf(client, list.get(0), variable.getNegate()));
                     break;
                 case ("ACTIVE_USER_OF"):
-                    listResult.add(analizingActiveUserOf(client, list.get(0), variable.getNegate()));
+                    listResult.add(analyzingActiveUserOf(client, list.get(0), variable.getNegate()));
                     break;
                 case ("TRANSACTION_SUM_COMPARE"):
                     listResult
-                            .add(analisingTransactionSumCompare(client, list.get(0), list.get(1), list.get(2),
+                            .add(analysingTransactionSumCompare(client, list.get(0), list.get(1), list.get(2),
                                     list.get(3), variable.getNegate()));
                     break;
                 case ("TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW"):
-                    listResult.add(analizingTransactionSumCompareDepositWithDraw(client, list.get(0), list.get(1),
+                    listResult.add(analyzingTransactionSumCompareDepositWithDraw(client, list.get(0), list.get(1),
                             variable.getNegate()));
                     break;
             }
@@ -48,21 +48,21 @@ public class LogicDinamic {
         return resultat;
     }
 
-    private Boolean analizingUserOf(UUID clientId, String typeTransaction, Boolean negate) {
+    private Boolean analyzingUserOf(UUID clientId, String typeTransaction, Boolean negate) {
         boolean truthCheck;
         truthCheck = projectRepository.getListTransactions(clientId).stream().anyMatch(o -> o.getTypeProduct()
                 .equalsIgnoreCase(typeTransaction));
         return truthCheck == negate;
     }
 
-    private Boolean analizingActiveUserOf(UUID clientId, String typeTransaction, Boolean negate) {
+    private Boolean analyzingActiveUserOf(UUID clientId, String typeTransaction, Boolean negate) {
         boolean truthCheck;
         truthCheck = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
                 .equalsIgnoreCase(typeTransaction)).count() >= 5;
         return truthCheck == negate;
     }
 
-    private Boolean analisingTransactionSumCompare(UUID clientId, String typeProduct, String typeTransaction,
+    private Boolean analysingTransactionSumCompare(UUID clientId, String typeProduct, String typeTransaction,
                                                    String comparisonOperation, String stringNumber, Boolean negate) {
         long number = Long.parseLong(stringNumber);
         long amount = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
@@ -72,7 +72,7 @@ public class LogicDinamic {
         return truthCheck == negate;
     }
 
-    private Boolean analizingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
+    private Boolean analyzingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
                                                                   String comparisonOperation, Boolean negate) {
         long deposit, withdraw;
         deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
