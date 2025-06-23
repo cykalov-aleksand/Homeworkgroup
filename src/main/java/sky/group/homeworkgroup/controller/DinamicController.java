@@ -37,5 +37,4 @@ public class DinamicController {
     public List<Dinamic> adviceAll() {
         return dinamicService.allAdvice();
     }
-
 }
