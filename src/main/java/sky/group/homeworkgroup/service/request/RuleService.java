@@ -1,10 +1,14 @@
 package sky.group.homeworkgroup.service.request;
 
 import org.springframework.stereotype.Service;
+import sky.group.homeworkgroup.model.StaticRuleModel;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.repository.dynamic.DinamicReposytory;
 import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
+//import sky.group.homeworkgroup.repository.dynamic.StaticRuleRepository;
+//import sky.group.homeworkgroup.repository.dynamic.StaticRuleRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +22,6 @@ public class RuleService {
         this.ruleRepository = ruleRepository;
         this.dinamicReposytory = dinamicReposytory;
     }
-
 
     public List<Rule> allAdvice(Long idProduct) {
         Map<Long, List<Rule>> mapRule = new HashMap<>();
@@ -37,5 +40,8 @@ public class RuleService {
         }
         return "рекомендация с id=" + idRule + " не принадлежит продукту с Id= " + idRule;
     }
+   // public List<StaticRuleModel>staticRuleAll(){
+   //     return staticRuleRepository.find();
+   // }
 
 }

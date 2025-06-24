@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import sky.group.homeworkgroup.model.StaticRuleModel;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.service.request.DinamicService;
 import sky.group.homeworkgroup.service.request.RuleService;
 
 import java.util.List;
@@ -15,9 +17,11 @@ import java.util.List;
 @RequestMapping("/rule")
 public class RuleController {
     private final RuleService ruleService;
+    private final DinamicService dinamicService;
 
-    public RuleController(RuleService ruleService) {
+    public RuleController(RuleService ruleService, DinamicService dinamicService) {
         this.ruleService = ruleService;
+        this.dinamicService = dinamicService;
     }
 
     @DeleteMapping("/delete")
@@ -35,6 +39,11 @@ public class RuleController {
     @Operation(summary = "Отображаем имеющиеся советы по продукту с заданным id")
     public List<Rule> AdviceAll(@RequestParam("ID product") Long idProduct) {
         return ruleService.allAdvice(idProduct);
+    }
+    @GetMapping("/stats")
+    @Operation(summary = "Отображаем статистику срабатываний правил")
+    public ResponseEntity<List<StaticRuleModel>> staticRule() {
+        return ResponseEntity.ok().body(dinamicService.staticRuleAll());
     }
 }
 
