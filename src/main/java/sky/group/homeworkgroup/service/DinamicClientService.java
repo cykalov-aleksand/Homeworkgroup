@@ -7,6 +7,7 @@ import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.service.logic.LogicDinamic;
+import sky.group.homeworkgroup.service.request.DinamicService;
 
 import java.util.*;
 
@@ -15,11 +16,13 @@ public class DinamicClientService {
     private final DinamicReposytory dinamicReposytory;
     private final RuleRepository ruleRepository;
     private final LogicDinamic logicDinamic;
+    private final DinamicService dinamicService;
 
-    public DinamicClientService(DinamicReposytory dinamicReposytory, RuleRepository ruleRepository, LogicDinamic logicDinamic) {
+    public DinamicClientService(DinamicReposytory dinamicReposytory, RuleRepository ruleRepository, LogicDinamic logicDinamic, DinamicService dinamicService) {
         this.dinamicReposytory = dinamicReposytory;
         this.ruleRepository = ruleRepository;
         this.logicDinamic = logicDinamic;
+        this.dinamicService = dinamicService;
     }
 
     public List<OutputData> searchForRecommendationsDinamic(UUID id) {
@@ -36,7 +39,8 @@ public class DinamicClientService {
                 Dinamic element = dinamicReposytory.findId(contact.getKey());
                 recommendedProducts.add(new OutputData(UUID.fromString(element.getProductId()), element.getProductName(),
                         element.getProductText()));
-            }
+                ruleRepository.addCount(contact.getKey());
+                 }
         }
         return recommendedProducts;
     }

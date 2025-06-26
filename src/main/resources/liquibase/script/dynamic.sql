@@ -13,8 +13,9 @@ CREATE TABLE dinamic(
           dinamic_id BIGSERIAL REFERENCES dinamic(id) ON DELETE CASCADE,
           query TEXT,
           arguments TEXT[],
-          negate Boolean);
-
+          negate Boolean,
+          rule_id BIGSERIAL,
+          count INTEGER);
 
 
 

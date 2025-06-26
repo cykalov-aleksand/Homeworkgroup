@@ -17,7 +17,8 @@ public class Rule {
     private String query;
     private List<String> arguments;
     private Boolean negate;
-
+    @Embedded
+    private Statistic statistic;
     public Rule() {
     }
 
@@ -33,9 +34,19 @@ public class Rule {
         return Objects.hashCode(id);
     }
 
+    public Statistic getStatistic() {
+        return statistic;
+    }
+
+    public void setStatistic(Statistic statistic) {
+        this.statistic = statistic;
+    }
+
     public Long getId() {
         return id;
     }
+
+
 
     public void setId(Long id) {
         this.id = id;

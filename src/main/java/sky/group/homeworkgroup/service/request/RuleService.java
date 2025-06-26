@@ -2,6 +2,7 @@ package sky.group.homeworkgroup.service.request;
 
 import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.model.model_dinamicbase.Statistic;
 import sky.group.homeworkgroup.repository.dynamic.DinamicReposytory;
 import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
 
@@ -36,6 +37,9 @@ public class RuleService {
             }
         }
         return "рекомендация с id=" + idRule + " не принадлежит продукту с Id= " + idRule;
+    }
+    public List<Statistic>listStatic(){
+        return ruleRepository.findCount();
     }
 
 }
