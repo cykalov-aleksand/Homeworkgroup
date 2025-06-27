@@ -24,4 +24,5 @@ public class CacheController {
             return ResponseEntity.status(500).body("Произошла ошибка при очистке кеша.");
         }
     }
+
 }
