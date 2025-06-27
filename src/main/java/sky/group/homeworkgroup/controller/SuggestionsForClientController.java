@@ -38,13 +38,13 @@ public class SuggestionsForClientController {
 
     @GetMapping("/username/{userName}")
     @Operation(summary = "Вводим username клиента для динамического анализа")
-    public ResponseEntity<List<String>> listLastFirstName(@PathVariable String userName) {
+    public ResponseEntity<UserParameters> listLastFirstName(@PathVariable String userName) {
         return dinamicClientService.listLastFirstName(userName);
     }
     @ExceptionHandler(WhenNumberNotEqualOne.class)
     public ResponseEntity<String> divisionByZeroHandler
             (WhenNumberNotEqualOne e) {
-        // Возвращаем статус 400 Bad Request с сообщением об ошибке
-        return ResponseEntity.badRequest().body(e.getMessage());
+        // Возвращаем статус 204
+        return ResponseEntity.status(204).body("");
     }
 }

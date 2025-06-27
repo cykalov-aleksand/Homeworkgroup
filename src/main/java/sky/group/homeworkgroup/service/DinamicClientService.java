@@ -50,16 +50,16 @@ public class DinamicClientService {
         return recommendedProducts;
     }
 
-    public ResponseEntity<List<String>> listLastFirstName(String userName){
+    public ResponseEntity<UserParameters> listLastFirstName(String userName){
         if (projectRepository.countUserName(userName)!=1) {
             // Выбрасываем собственное исключение, если b равно нулю
             throw new WhenNumberNotEqualOne();
         }
-        List<String>list=new ArrayList<>();
+       // List<String>list=new ArrayList<>();
         UserParameters userParameters=projectRepository.findUserParameters(userName);
-        list.add(userParameters.getFirstName());
-        list.add(userParameters.getLastName());
+       // list.add(userParameters.getFirstName());
+       // list.add(userParameters.getLastName());
         searchForRecommendationsDinamic(userParameters.getId());
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok().body(userParameters);
     }
 }

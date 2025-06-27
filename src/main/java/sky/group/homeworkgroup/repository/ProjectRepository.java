@@ -3,10 +3,8 @@ package sky.group.homeworkgroup.repository;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.model.modeljbd.UserParameters;
 
