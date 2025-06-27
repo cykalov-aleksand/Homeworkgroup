@@ -1,6 +1,11 @@
 package sky.group.homeworkgroup.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import sky.group.homeworkgroup.exception.WhenNumberNotEqualOne;
+import sky.group.homeworkgroup.model.modeljbd.UserParameters;
+import sky.group.homeworkgroup.repository.ProjectRepository;
 import sky.group.homeworkgroup.repository.dynamic.DinamicReposytory;
 import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
 import sky.group.homeworkgroup.model.OutputData;
@@ -16,13 +21,13 @@ public class DinamicClientService {
     private final DinamicReposytory dinamicReposytory;
     private final RuleRepository ruleRepository;
     private final LogicDinamic logicDinamic;
-    private final DinamicService dinamicService;
+    private final ProjectRepository projectRepository;
 
-    public DinamicClientService(DinamicReposytory dinamicReposytory, RuleRepository ruleRepository, LogicDinamic logicDinamic, DinamicService dinamicService) {
+    public DinamicClientService(DinamicReposytory dinamicReposytory, RuleRepository ruleRepository, LogicDinamic logicDinamic, ProjectRepository projectRepository) {
         this.dinamicReposytory = dinamicReposytory;
         this.ruleRepository = ruleRepository;
         this.logicDinamic = logicDinamic;
-        this.dinamicService = dinamicService;
+        this.projectRepository = projectRepository;
     }
 
     public List<OutputData> searchForRecommendationsDinamic(UUID id) {
@@ -43,5 +48,18 @@ public class DinamicClientService {
                  }
         }
         return recommendedProducts;
+    }
+
+    public ResponseEntity<List<String>> listLastFirstName(String userName){
+        if (projectRepository.countUserName(userName)!=1) {
+            // Выбрасываем собственное исключение, если b равно нулю
+            throw new WhenNumberNotEqualOne();
+        }
+        List<String>list=new ArrayList<>();
+        UserParameters userParameters=projectRepository.findUserParameters(userName);
+        list.add(userParameters.getFirstName());
+        list.add(userParameters.getLastName());
+        searchForRecommendationsDinamic(userParameters.getId());
+        return ResponseEntity.ok().body(list);
     }
 }
