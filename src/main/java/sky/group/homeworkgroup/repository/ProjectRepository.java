@@ -31,11 +31,14 @@ public class ProjectRepository {
                         "TRANSACTIONS.PRODUCT_ID = PRODUCTS.ID WHERE USER_ID =?",
                 new UserRowMapper(), id);
     }
-public int countUserName(String userName){
-    Integer result = jdbcTemplate.queryForObject(
-            "SELECT COUNT(USERNAME) FROM USERS u WHERE u.username = ?", Integer.class,userName);
-    return result != null ? result : 0;
-}
+
+    public int countUserName(String userName) {
+        Integer result = jdbcTemplate.queryForObject(
+                "SELECT COUNT(USERNAME) FROM USERS u WHERE u.username = ?", Integer.class, userName);
+        return result != null ? result : 0;
+    }
+
+    @Cacheable(value = "userParams", key = "#userName")
     public UserParameters findUserParameters(String userName) {
         return jdbcTemplate.queryForObject(
                 "SELECT ID,FIRST_NAME,LAST_NAME FROM USERS u WHERE u.USERNAME =?",
