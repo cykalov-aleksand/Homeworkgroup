@@ -42,7 +42,7 @@ public class SuggestionsForClientController {
         return dinamicClientService.listLastFirstName(userName);
     }
     @ExceptionHandler(WhenNumberNotEqualOne.class)
-    public ResponseEntity<String> divisionByZeroHandler
+    public ResponseEntity<String> whenNumberNotEqualOne
             (WhenNumberNotEqualOne e) {
         // Возвращаем статус 204
         return ResponseEntity.status(204).body("");
