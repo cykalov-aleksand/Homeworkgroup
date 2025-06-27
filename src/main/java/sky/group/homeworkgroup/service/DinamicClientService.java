@@ -62,4 +62,5 @@ public class DinamicClientService {
         searchForRecommendationsDinamic(userParameters.getId());
         return ResponseEntity.ok().body(userParameters);
     }
+
 }
