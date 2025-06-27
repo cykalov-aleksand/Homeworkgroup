@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
+import sky.group.homeworkgroup.model.model_dinamicbase.Statistic;
 import sky.group.homeworkgroup.service.request.RuleService;
 
 import java.util.List;
@@ -33,8 +34,13 @@ public class RuleController {
 
     @GetMapping("/allRule")
     @Operation(summary = "Отображаем имеющиеся советы по продукту с заданным id")
-    public List<Rule> AdviceAll(@RequestParam("ID product") Long idProduct) {
+    public List<Rule> adviceAll(@RequestParam("ID product") Long idProduct) {
         return ruleService.allAdvice(idProduct);
+    }
+    @GetMapping("/stats")
+    @Operation(summary = "Отображаем статистику использования динамических правил")
+    public List<Statistic> listStaticCount() {
+        return ruleService.listStatic();
     }
 }
 

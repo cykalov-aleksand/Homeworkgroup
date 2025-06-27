@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
+import sky.group.homeworkgroup.model.modeljbd.UserParameters;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,4 +31,16 @@ public class ProjectRepository {
                         "TRANSACTIONS.PRODUCT_ID = PRODUCTS.ID WHERE USER_ID =?",
                 new UserRowMapper(), id);
     }
+public int countUserName(String userName){
+    Integer result = jdbcTemplate.queryForObject(
+            "SELECT COUNT(USERNAME) FROM USERS u WHERE u.username = ?", Integer.class,userName);
+    return result != null ? result : 0;
 }
+    public UserParameters findUserParameters(String userName) {
+        return jdbcTemplate.queryForObject(
+                "SELECT ID,FIRST_NAME,LAST_NAME FROM USERS u WHERE u.USERNAME =?",
+                new ParameterRowMapper(), userName);
+    }
+}
+
+

@@ -2,11 +2,10 @@ package sky.group.homeworkgroup.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sky.group.homeworkgroup.exception.WhenNumberNotEqualOne;
 import sky.group.homeworkgroup.model.OutputData;
+import sky.group.homeworkgroup.model.modeljbd.UserParameters;
 import sky.group.homeworkgroup.service.ClientService;
 import sky.group.homeworkgroup.service.DinamicClientService;
 
@@ -35,5 +34,17 @@ public class SuggestionsForClientController {
     @Operation(summary = "Вводим id клиента для динамического анализа")
     public ResponseEntity<Optional<List<OutputData>>> getRecommendationsDinamic(@PathVariable UUID user_Id) {
         return ResponseEntity.ok(Optional.of(dinamicClientService.searchForRecommendationsDinamic(user_Id)));
+    }
+
+    @GetMapping("/username/{userName}")
+    @Operation(summary = "Вводим username клиента для динамического анализа")
+    public ResponseEntity<UserParameters> listLastFirstName(@PathVariable String userName) {
+        return dinamicClientService.listLastFirstName(userName);
+    }
+    @ExceptionHandler(WhenNumberNotEqualOne.class)
+    public ResponseEntity<String> whenNumberNotEqualOne
+            (WhenNumberNotEqualOne e) {
+        // Возвращаем статус 204
+        return ResponseEntity.status(204).body("");
     }
 }
