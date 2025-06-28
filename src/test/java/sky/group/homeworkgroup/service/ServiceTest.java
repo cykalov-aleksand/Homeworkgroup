@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import sky.group.homeworkgroup.logic.Logic;
 import sky.group.homeworkgroup.model.OutputData;
+import sky.group.homeworkgroup.service.logic.Logic;
 
 import java.util.List;
 import java.util.UUID;

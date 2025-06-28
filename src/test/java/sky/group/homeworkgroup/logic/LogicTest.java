@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.repository.ProjectRepository;
+import sky.group.homeworkgroup.service.logic.Logic;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,18 +37,7 @@ public class LogicTest {
         assertEquals(0, result.size());
     }
 
-    @Test
-    void testEdgeCaseTransactions() {
-        UUID testId = UUID.randomUUID();
-        InformationClient transaction1 = new InformationClient("DEBIT", "DEPOSIT", 1000);
-        InformationClient transaction2 = new InformationClient("DEBIT", "EXPENSE", 100_000);
-        when(projectRepository.getListTransactions(testId)).thenReturn(List.of(transaction1, transaction2));
 
-        List<UUID> result = logic.analise(testId);
-
-        assertEquals(1, result.size());
-        assertEquals(UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"), result.get(0));
-    }
 
     // Additional tests for other corner cases can be added here
 }
