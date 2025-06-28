@@ -43,5 +43,3 @@ public class RuleController {
         return ruleService.listStatic();
     }
 }
-
-
