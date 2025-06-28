@@ -1,7 +1,9 @@
 package sky.group.homeworkgroup.service;
 
 
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
+import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.service.logic.Logic;
 
@@ -15,9 +17,11 @@ import java.util.*;
 public class ClientService {
 
     private final Logic logic;
+    private final BuildProperties buildProperties;
 
-    public ClientService(Logic logic) {
+    public ClientService(Logic logic, BuildProperties buildProperties) {
         this.logic = logic;
+        this.buildProperties = buildProperties;
     }
 
     public List<OutputData> searchForRecommendations(UUID id) {
@@ -54,7 +58,9 @@ public class ClientService {
         }
         return generalLine.toString();
     }
-
+    public InfoBuild info() {
+        return new InfoBuild("ClientService", buildProperties.getVersion());
+    }
 
 }
 

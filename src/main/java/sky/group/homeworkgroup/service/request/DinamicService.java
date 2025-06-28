@@ -2,15 +2,16 @@ package sky.group.homeworkgroup.service.request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
 
+import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
-import sky.group.homeworkgroup.model.model_dinamicbase.Statistic;
 import sky.group.homeworkgroup.repository.dynamic.DinamicReposytory;
 import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
 
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
-//import sky.group.homeworkgroup.repository.dynamic.StatisticRepository;
+
 
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class DinamicService {
 
     private final DinamicReposytory dinamicRepository;
     private final RuleRepository ruleRepository;
-  //  private final StatisticRepository statisticRepository;
+  private final BuildProperties buildProperties;
 
-    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
+    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository, BuildProperties buildProperties) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
-  //      this.statisticRepository = statisticRepository;
+        this.buildProperties = buildProperties;
     }
 
     Logger logger = LoggerFactory.getLogger(DinamicService.class);
@@ -48,6 +49,9 @@ public class DinamicService {
 
     public List<Dinamic> allAdvice() {
         return dinamicRepository.find();
+    }
+    public InfoBuild info() {
+        return new InfoBuild("request/DinamicService", buildProperties.getVersion());
     }
 }
 

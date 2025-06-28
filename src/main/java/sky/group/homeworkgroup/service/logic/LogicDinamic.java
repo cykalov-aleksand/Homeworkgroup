@@ -1,6 +1,8 @@
 package sky.group.homeworkgroup.service.logic;
 
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Component;
+import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.repository.ProjectRepository;
@@ -13,9 +15,11 @@ import java.util.UUID;
 @Component
 public class LogicDinamic {
     private final ProjectRepository projectRepository;
+    private final BuildProperties buildProperties;
 
-    public LogicDinamic(ProjectRepository projectRepository) {
+    public LogicDinamic(ProjectRepository projectRepository, BuildProperties buildProperties) {
         this.projectRepository = projectRepository;
+        this.buildProperties = buildProperties;
     }
 
     public Boolean dverificationOfComplianceWith(UUID client, List<Rule> condition) {
@@ -117,6 +121,9 @@ public class LogicDinamic {
                 break;
         }
         return false;
+    }
+    public InfoBuild info() {
+        return new InfoBuild("logic/LogicDinamic", buildProperties.getVersion());
     }
 }
 
