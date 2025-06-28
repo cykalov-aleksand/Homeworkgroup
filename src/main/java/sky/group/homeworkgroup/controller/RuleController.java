@@ -42,7 +42,6 @@ public class RuleController {
     public List<Statistic> listStaticCount() {
         return ruleService.listStatic();
     }
-
 }
 
 
