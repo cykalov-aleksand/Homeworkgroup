@@ -1,6 +1,8 @@
 package sky.group.homeworkgroup.service.logic;
 
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Component;
+import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.repository.ProjectRepository;
 
@@ -12,9 +14,11 @@ import java.util.UUID;
 @Component
 public class Logic {
     private final ProjectRepository projectRepository;
+    private final BuildProperties buildProperties;
 
-    public Logic(ProjectRepository projectRepository) {
+    public Logic(ProjectRepository projectRepository, BuildProperties buildProperties) {
         this.projectRepository = projectRepository;
+        this.buildProperties = buildProperties;
     }
 
     public List<UUID> analise(UUID id) {
@@ -63,6 +67,9 @@ public class Logic {
         return projectRepository.getListTransactions(id).stream().filter(o -> o.getTypeProduct()
                         .equalsIgnoreCase("DEBIT")).filter(o -> !o.getTypeTransaction().equalsIgnoreCase("DEPOSIT"))
                 .mapToLong(InformationClient::getAmountTransaction).sum();
+    }
+    public InfoBuild info() {
+        return new InfoBuild("logic/Logic", buildProperties.getVersion());
     }
 
 }

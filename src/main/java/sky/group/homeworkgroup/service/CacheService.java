@@ -21,8 +21,9 @@ public class CacheService {
     }
 
     Logger logger = LoggerFactory.getLogger(CacheService.class);
-    public InfoBuild info(){
-        return new InfoBuild("InfoBuild",buildProperties.getVersion());
+
+    public InfoBuild info() {
+        return new InfoBuild("CacheService", buildProperties.getVersion());
     }
 
     public void clearAllCaches() {
