@@ -19,6 +19,7 @@ public class Rule {
     private Boolean negate;
     @Embedded
     private Statistic statistic;
+
     public Rule() {
     }
 
@@ -45,7 +46,6 @@ public class Rule {
     public Long getId() {
         return id;
     }
-
 
 
     public void setId(Long id) {

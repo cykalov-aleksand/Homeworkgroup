@@ -1,11 +1,8 @@
 package sky.group.homeworkgroup.service.logic;
 
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Component;
-import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.repository.ProjectRepository;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +40,7 @@ public class Logic {
         }
         return list;
     }
+
     /**
      * Производим подсчет операций клиента с указанным id по определенному типу продукта
      */
@@ -50,6 +48,7 @@ public class Logic {
         return projectRepository.getListTransactions(id).stream().filter(o -> o.getTypeProduct()
                 .equalsIgnoreCase(type)).count();
     }
+
     /**
      * Производим подсчет суммы выполненных операций определенным клиентом по определенному продукту
      */
@@ -57,6 +56,7 @@ public class Logic {
         return projectRepository.getListTransactions(id).stream().filter(o -> o.getTypeProduct()
                 .equalsIgnoreCase(type)).mapToLong(InformationClient::getAmountTransaction).sum();
     }
+
     /**
      * Производим подсчет количества транзакций определенного клиента по типу транзакций CREDIT
      */
@@ -64,6 +64,7 @@ public class Logic {
         return projectRepository.getListTransactions(id).stream().filter(o -> o.getTypeTransaction()
                 .equalsIgnoreCase("CREDIT")).count();
     }
+
     /**
      * Производим подсчет суммы выполненных операций определенным клиентом по типу продукта DEBIT
      * выполненных по типу транзакций DEPOSIT
@@ -73,6 +74,7 @@ public class Logic {
                         .equalsIgnoreCase("DEBIT")).filter(o -> o.getTypeTransaction().equalsIgnoreCase("DEPOSIT"))
                 .mapToLong(InformationClient::getAmountTransaction).sum();
     }
+
     /**
      * Производим подсчет суммы расходов указанного клиента выполненных операций определенным клиентом по типу
      * продукта DEBIT и не равному типу транзакций DEPOSIT
@@ -82,5 +84,4 @@ public class Logic {
                         .equalsIgnoreCase("DEBIT")).filter(o -> !o.getTypeTransaction().equalsIgnoreCase("DEPOSIT"))
                 .mapToLong(InformationClient::getAmountTransaction).sum();
     }
-
 }

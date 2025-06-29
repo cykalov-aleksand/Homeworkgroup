@@ -52,21 +52,22 @@ public class DinamicClientService {
                         element.getProductText()));
                 //увеличиваем значение счетчика в таблице rule в колонке count
                 ruleRepository.addCount(contact.getKey());
-                 }
+            }
         }
         return recommendedProducts;
     }
+
     /**
      * Проводим анализ наличия строки userName в ячейке username таблице users если не равно 1 выбрасываем исключение
      */
 
-    public ResponseEntity<UserParameters> listLastFirstName(String userName){
-        if (projectRepository.countUserName(userName)!=1) {
+    public ResponseEntity<UserParameters> listLastFirstName(String userName) {
+        if (projectRepository.countUserName(userName) != 1) {
             // Выбрасываем собственное исключение, если b равно нулю
             throw new WhenNumberNotEqualOne();
         }
-       UserParameters userParameters=projectRepository.findUserParameters(userName);
-       searchForRecommendationsDinamic(userParameters.getId());
+        UserParameters userParameters = projectRepository.findUserParameters(userName);
+        searchForRecommendationsDinamic(userParameters.getId());
         return ResponseEntity.ok().body(userParameters);
     }
 

@@ -37,6 +37,7 @@ public class RuleController {
     public List<Rule> adviceAll(@RequestParam("ID product") Long idProduct) {
         return ruleService.allAdvice(idProduct);
     }
+
     @GetMapping("/stats")
     @Operation(summary = "Отображаем статистику использования динамических правил")
     public List<Statistic> listStaticCount() {

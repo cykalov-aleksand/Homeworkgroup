@@ -20,12 +20,14 @@ public class CacheService {
     }
 
     Logger logger = LoggerFactory.getLogger(CacheService.class);
+
     /**
      * Заносим данные в объект InfoBuild считанные с бина BuildProperties
      */
     public InfoBuild info() {
         return new InfoBuild(buildProperties.getName(), buildProperties.getVersion());
     }
+
     /**
      * Производим сброс кеша
      */

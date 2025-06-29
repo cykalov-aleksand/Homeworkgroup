@@ -1,12 +1,10 @@
 package sky.group.homeworkgroup.service;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.service.logic.Logic;
-
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -36,7 +34,9 @@ public class ClientService {
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
 
     }
+
     Logger logger = LoggerFactory.getLogger(ClientService.class);
+
     /**
      * Производим чтение информации с текстового файла с указанным именем
      */
@@ -62,5 +62,5 @@ public class ClientService {
         }
         return generalLine.toString();
     }
-   }
+}
 

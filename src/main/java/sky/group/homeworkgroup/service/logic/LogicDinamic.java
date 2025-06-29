@@ -1,8 +1,6 @@
 package sky.group.homeworkgroup.service.logic;
 
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Component;
-import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 import sky.group.homeworkgroup.repository.ProjectRepository;
@@ -52,6 +50,7 @@ public class LogicDinamic {
         }
         return resultat;
     }
+
     /**
      * Метод проверки соблюдения условия USER_OF
      */
@@ -61,6 +60,7 @@ public class LogicDinamic {
                 .equalsIgnoreCase(typeTransaction));
         return truthCheck == negate;
     }
+
     /**
      * Метод проверки соблюдения условия ACTIVE_USER_OF
      */
@@ -70,6 +70,7 @@ public class LogicDinamic {
                 .equalsIgnoreCase(typeTransaction)).count() >= 5;
         return truthCheck == negate;
     }
+
     /**
      * Метод проверки соблюдения условия TRANSACTION_SUM_COMPARE
      */
@@ -82,19 +83,23 @@ public class LogicDinamic {
         boolean truthCheck = compareNumber(comparisonOperation, amount, number);
         return truthCheck == negate;
     }
+
     /**
      * Метод проверки соблюдения условия TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
      */
     private Boolean analyzingTransactionSumCompareDepositWithDraw(UUID clientId, String typeTransaction,
                                                                   String comparisonOperation, Boolean negate) {
         long deposit, withdraw;
-        deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
-                .filter(o -> o.getTypeTransaction().equalsIgnoreCase("DEPOSIT")).mapToLong(InformationClient::getAmountTransaction).sum();
-        withdraw = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct().equalsIgnoreCase(typeTransaction))
-                .filter(o -> o.getTypeTransaction().equalsIgnoreCase("WITHDRAW")).mapToLong(InformationClient::getAmountTransaction).sum();
+        deposit = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
+                .equalsIgnoreCase(typeTransaction)).filter(o -> o.getTypeTransaction()
+                .equalsIgnoreCase("DEPOSIT")).mapToLong(InformationClient::getAmountTransaction).sum();
+        withdraw = projectRepository.getListTransactions(clientId).stream().filter(o -> o.getTypeProduct()
+                .equalsIgnoreCase(typeTransaction)).filter(o -> o.getTypeTransaction()
+                .equalsIgnoreCase("WITHDRAW")).mapToLong(InformationClient::getAmountTransaction).sum();
         boolean truthCheck = compareNumber(comparisonOperation, deposit, withdraw);
         return truthCheck == negate;
     }
+
     /**
      * Метод преобразования колонки "argument" из строки в список
      */
@@ -102,8 +107,9 @@ public class LogicDinamic {
         String line = string.replace("(", "").replace(")", "");
         return Arrays.stream(line.split(",")).toList();
     }
+
     /**
-     * преобразование строки в значение операции
+     * Преобразование строки в значение операции
      */
     private boolean compareNumber(String operator, long number1, long number2) {
         switch (operator) {
@@ -135,7 +141,6 @@ public class LogicDinamic {
         }
         return false;
     }
-
 }
 
 

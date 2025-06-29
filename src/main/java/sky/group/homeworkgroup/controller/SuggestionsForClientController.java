@@ -41,10 +41,10 @@ public class SuggestionsForClientController {
     public ResponseEntity<UserParameters> listLastFirstName(@PathVariable String userName) {
         return dinamicClientService.listLastFirstName(userName);
     }
+
     @ExceptionHandler(WhenNumberNotEqualOne.class)
     public ResponseEntity<String> whenNumberNotEqualOne
             (WhenNumberNotEqualOne e) {
-        // Возвращаем статус 204
         return ResponseEntity.status(204).body("");
     }
 }
