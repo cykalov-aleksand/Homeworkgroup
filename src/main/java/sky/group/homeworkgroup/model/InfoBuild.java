@@ -3,7 +3,9 @@ package sky.group.homeworkgroup.model;
 public class InfoBuild {
     private String name;
     private String version;
-    public InfoBuild(){}
+
+    public InfoBuild() {
+    }
 
     public InfoBuild(String name, String version) {
         this.name = name;

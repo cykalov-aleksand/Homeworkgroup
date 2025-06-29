@@ -6,7 +6,9 @@ public class UserParameters {
     private UUID id;
     private String firstName;
     private String lastName;
-    public UserParameters(){}
+
+    public UserParameters() {
+    }
 
     public UUID getId() {
         return id;

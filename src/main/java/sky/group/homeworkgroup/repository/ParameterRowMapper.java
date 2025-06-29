@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class ParameterRowMapper implements RowMapper<UserParameters> {
+    /**
+     * Производим запись информации выведенной с SQL запроса в модель UserParameters
+     */
     @Override
     public UserParameters mapRow(ResultSet rs, int rowNum) throws SQLException {
         UserParameters userParameters = new UserParameters();
