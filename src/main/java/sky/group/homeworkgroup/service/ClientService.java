@@ -1,9 +1,9 @@
 package sky.group.homeworkgroup.service;
 
 
-import org.springframework.boot.info.BuildProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.OutputData;
 import sky.group.homeworkgroup.service.logic.Logic;
 
@@ -17,13 +17,14 @@ import java.util.*;
 public class ClientService {
 
     private final Logic logic;
-    private final BuildProperties buildProperties;
 
-    public ClientService(Logic logic, BuildProperties buildProperties) {
+    public ClientService(Logic logic) {
         this.logic = logic;
-        this.buildProperties = buildProperties;
     }
 
+    /**
+     * Производим запись информации с текстовых файлов в Map
+     */
     public List<OutputData> searchForRecommendations(UUID id) {
         Map<UUID, OutputData> recommendedProducts = new HashMap<>();
         recommendedProducts.put(UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a"), new OutputData(UUID.fromString(
@@ -35,7 +36,10 @@ public class ClientService {
         return logic.analise(id).stream().map(recommendedProducts::get).toList();
 
     }
-
+    Logger logger = LoggerFactory.getLogger(ClientService.class);
+    /**
+     * Производим чтение информации с текстового файла с указанным именем
+     */
     private String textFile(String stroca) {
         BufferedReader reader = null;
         StringBuilder generalLine = new StringBuilder();
@@ -46,21 +50,17 @@ public class ClientService {
                 generalLine.append(line);
             }
         } catch (IOException e) {
-            System.err.println("Ошибка чтения файла: " + e.getMessage());
+            logger.error("Ошибка чтения файла: {}", e.getMessage());
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.err.println("Ошибка закрытия файла: " + e.getMessage());
+                logger.error("Ошибка закрытия файла: {}", e.getMessage());
             }
         }
         return generalLine.toString();
     }
-    public InfoBuild info() {
-        return new InfoBuild("ClientService", buildProperties.getVersion());
-    }
-
-}
+   }
 

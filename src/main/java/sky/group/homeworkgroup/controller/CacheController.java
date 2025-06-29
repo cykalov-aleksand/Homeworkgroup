@@ -20,23 +20,10 @@ import sky.group.homeworkgroup.service.request.RuleService;
 @RequestMapping("/management")
 public class CacheController {
     private final CacheService cacheService;
-    private final ClientService clientService;
-    private final DinamicClientService dinamicClientService;
-    private final DinamicService dinamicService;
-    private final RuleService ruleService;
-    private final Logic logic;
-    private final LogicDinamic logicDinamic;
 
-    public CacheController(CacheService cacheService, ClientService clientService,
-                           DinamicClientService dinamicClientService, DinamicService dinamicService,
-                           RuleService ruleService, Logic logic, LogicDinamic logicDinamic) {
+
+    public CacheController(CacheService cacheService) {
         this.cacheService = cacheService;
-        this.clientService = clientService;
-        this.dinamicClientService = dinamicClientService;
-        this.dinamicService = dinamicService;
-        this.ruleService = ruleService;
-        this.logic = logic;
-        this.logicDinamic = logicDinamic;
     }
 
     @PostMapping("/clear-caches")
@@ -49,45 +36,9 @@ public class CacheController {
         }
     }
 
-    @GetMapping("/info/changeService")
+    @GetMapping("/info")
     @Operation(summary = "Отображаем информацию по сервису ChangeService")
     public InfoBuild changeServiceInfo() {
         return cacheService.info();
-    }
-
-    @GetMapping("/info/clientService")
-    @Operation(summary = "Отображаем информацию по сервису ClientService")
-    public InfoBuild clientServiceInfo() {
-        return clientService.info();
-    }
-
-    @GetMapping("/info/dinamicClientService")
-    @Operation(summary = "Отображаем информацию по сервису DinamicClientService")
-    public InfoBuild dinamicClientServiceInfo() {
-        return dinamicClientService.info();
-    }
-
-    @GetMapping("/info/request/dinamicService")
-    @Operation(summary = "Отображаем информацию по сервису DinamicService")
-    public InfoBuild dinamicServiceInfo() {
-        return dinamicService.info();
-    }
-
-    @GetMapping("/info/request/ruleService")
-    @Operation(summary = "Отображаем информацию по сервису RuleService")
-    public InfoBuild RuleServiceInfo() {
-        return ruleService.info();
-    }
-
-    @GetMapping("/info/logic/logic")
-    @Operation(summary = "Отображаем информацию по сервису Logic")
-    public InfoBuild logicInfo() {
-        return logic.info();
-    }
-
-    @GetMapping("/info/logic/logicDinamic")
-    @Operation(summary = "Отображаем информацию по сервису LogicDinamic")
-    public InfoBuild LogicDinamicInfo() {
-        return logicDinamic.info();
     }
 }

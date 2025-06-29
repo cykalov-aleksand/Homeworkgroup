@@ -20,11 +20,15 @@ public class CacheService {
     }
 
     Logger logger = LoggerFactory.getLogger(CacheService.class);
-
+    /**
+     * Заносим данные в объект InfoBuild считанные с бина BuildProperties
+     */
     public InfoBuild info() {
-        return new InfoBuild("CacheService", buildProperties.getVersion());
+        return new InfoBuild(buildProperties.getName(), buildProperties.getVersion());
     }
-
+    /**
+     * Производим сброс кеша
+     */
     public void clearAllCaches() {
         logger.info("Кеш {} очищен", cacheManager.getCacheNames());
         cacheManager.getCacheNames().forEach(cacheName -> Objects.requireNonNull(cacheManager.getCache(cacheName)).clear());
