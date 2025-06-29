@@ -37,7 +37,7 @@ public class CacheController {
     }
 
     @GetMapping("/info")
-    @Operation(summary = "Отображаем информацию по сервису ChangeService")
+    @Operation(summary = "Отображаем информацию по сервису")
     public InfoBuild changeServiceInfo() {
         return cacheService.info();
     }
