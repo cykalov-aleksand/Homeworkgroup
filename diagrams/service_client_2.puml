@@ -1,0 +1,20 @@
+@startuml
+
+actor User
+participant "ServiceClient" as SC
+participant "Logic" as L
+participant "OutputData" as OD
+
+User -> SC: searchForRecommendations(id)
+activate SC
+SC -> L: analise(id)
+activate L
+L --> SC: List<UUID>
+deactivate L
+
+SC -> SC: Create recommendedProducts
+SC -> OD: Create OutputData
+SC --> User: List<OutputData>
+deactivate SC
+
+@enduml
