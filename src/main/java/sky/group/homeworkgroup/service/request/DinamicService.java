@@ -41,9 +41,9 @@ public class DinamicService {
     public Dinamic addDinamic(Dinamic argument) {
         Dinamic dinamic = dinamicRepository.save(argument);
         for (Rule variable : dinamic.getRule()) {
-            ruleRepository.saveRile(variable.getArguments(), variable.getNegate(), variable.getQuery(), argument.getId());
+            ruleRepository.saveRule(variable.getArguments(), variable.getNegate(), variable.getQuery(), argument.getId());
                    }
-        ruleRepository.saveRileCount(argument.getId());
+        ruleRepository.saveRuleCount(argument.getId());
         return dinamic;
     }
 

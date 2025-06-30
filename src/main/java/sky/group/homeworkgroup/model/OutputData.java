@@ -49,4 +49,13 @@ public class OutputData {
     public int hashCode() {
         return Objects.hash(id, name, text);
     }
+
+    @Override
+    public String toString() {
+        return "OutputData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

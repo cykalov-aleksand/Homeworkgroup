@@ -49,14 +49,14 @@ public class MainDataSourceConfiguration {
                 .packages(Dinamic.class)
                 .build();
     }
+
     /**
-    * Определяем стратегию управления транзакциями
-      */
+     * Определяем стратегию управления транзакциями
+     */
 
     @Primary
     @Bean(name = "bookingTransactionManager")
     public PlatformTransactionManager myTransactionManager(@Qualifier("bookingEntityManager") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
-
 }

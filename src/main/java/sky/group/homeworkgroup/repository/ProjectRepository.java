@@ -17,13 +17,12 @@ public class ProjectRepository {
 
     public ProjectRepository(@Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
     }
 
     /**
-     * создаем JSON SQL запрос для вывода списка объектов InformationClient с ячейками iser_id равными id
+     * Создаем JSON SQL запрос для вывода списка объектов InformationClient с ячейками iser_id равными id
      */
-    @Cacheable(value = "transactions_cache", key = "#id",unless = "#result == null")
+    @Cacheable(value = "transactions_cache", key = "#id", unless = "#result == null")
     public List<InformationClient> getListTransactions(UUID id) {
         return jdbcTemplate.query(
                 "SELECT TRANSACTIONS.ID ,TRANSACTIONS.USER_ID, TRANSACTIONS.TYPE,TRANSACTIONS.AMOUNT," +
@@ -32,13 +31,19 @@ public class ProjectRepository {
                 new UserRowMapper(), id);
     }
 
+    /**
+     * Создаем SQL запрос для подсчета количество строк содержащими определенное значение ячейки username
+     */
     public int countUserName(String userName) {
         Integer result = jdbcTemplate.queryForObject(
                 "SELECT COUNT(USERNAME) FROM USERS u WHERE u.username = ?", Integer.class, userName);
         return result != null ? result : 0;
     }
 
-    @Cacheable(value = "userParams", key = "#userName",unless ="#result==null")
+    /**
+     * Создаём SQL запрос для вывода строки содержащей определенное значение в ячейке username
+     */
+    @Cacheable(value = "userParams", key = "#userName", unless = "#result==null")
     public UserParameters findUserParameters(String userName) {
         return jdbcTemplate.queryForObject(
                 "SELECT ID,FIRST_NAME,LAST_NAME FROM USERS u WHERE u.USERNAME =?",

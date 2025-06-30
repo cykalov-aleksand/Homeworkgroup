@@ -83,6 +83,4 @@ public class Dinamic {
     public void setRule(List<Rule> rule) {
         this.rule = rule;
     }
-
-
 }
