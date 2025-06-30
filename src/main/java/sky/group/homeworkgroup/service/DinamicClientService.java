@@ -63,8 +63,7 @@ public class DinamicClientService {
 
     public ResponseEntity<UserParameters> listLastFirstName(String userName) {
         if (projectRepository.countUserName(userName) != 1) {
-            // Выбрасываем собственное исключение, если b равно нулю
-            throw new WhenNumberNotEqualOne();
+           throw new WhenNumberNotEqualOne();
         }
         UserParameters userParameters = projectRepository.findUserParameters(userName);
         searchForRecommendationsDinamic(userParameters.getId());
