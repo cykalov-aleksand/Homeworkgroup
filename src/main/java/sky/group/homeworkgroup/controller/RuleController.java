@@ -11,7 +11,6 @@ import sky.group.homeworkgroup.service.request.RuleService;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/rule")
 public class RuleController {
