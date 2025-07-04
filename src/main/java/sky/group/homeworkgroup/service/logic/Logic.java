@@ -16,9 +16,8 @@ public class Logic {
     public Logic(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
-
     /**
-     * Производим анализ соответствия данных клиента с указанным id данным укзанным в условии задачи
+     * Производим анализ соответствия данных клиента с указанным id данным указанным в условии задачи
      */
     public List<UUID> analise(UUID id) {
         List<UUID> list = new ArrayList<>();

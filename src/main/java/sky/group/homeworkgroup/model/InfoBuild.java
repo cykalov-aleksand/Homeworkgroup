@@ -1,5 +1,8 @@
 package sky.group.homeworkgroup.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Модель выдачи данных о системе внешнему пользователю")
 public class InfoBuild {
     private String name;
     private String version;

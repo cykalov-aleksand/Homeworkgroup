@@ -1,8 +1,10 @@
 package sky.group.homeworkgroup.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Objects;
 import java.util.UUID;
-
+@Schema(description = "Модель определяющая в каком виде будет представлена информация по предлагаемому продукту")
 public class OutputData {
     private UUID id;
     private String name;

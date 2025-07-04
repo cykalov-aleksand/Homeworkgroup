@@ -3,8 +3,6 @@ package sky.group.homeworkgroup.model.model_dinamicbase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Embeddable
 public class Statistic {
     @JsonProperty("rule_id")

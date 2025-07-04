@@ -1,7 +1,6 @@
 package sky.group.homeworkgroup.repository;
 
 import org.springframework.jdbc.core.RowMapper;
-import sky.group.homeworkgroup.model.modeljbd.InformationClient;
 import sky.group.homeworkgroup.model.modeljbd.UserParameters;
 
 import java.sql.ResultSet;
