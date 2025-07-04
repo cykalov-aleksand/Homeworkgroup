@@ -1,10 +1,11 @@
 package sky.group.homeworkgroup.model.model_dinamicbase;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
-
+@Schema(description = "Модель с характеристиками предлагаемого продукта, поля которого приведены к виду пригодному для дальнейшей обработки в приложении")
 @Entity
 public class Dinamic {
     @Id
@@ -14,11 +15,9 @@ public class Dinamic {
     private String productId;
     @Column(nullable = false, name = "product_name")
     private String productName;
-    /**
-     * Используем аннотацию @Column для вставления в ячейку длинного текста
-     */
     @Column(columnDefinition = "TEXT", nullable = false, name = "product_text")
     private String productText;
+    @Schema(description = "Описание условия при которых продукт может быть предложен клиенту")
     @OneToMany(mappedBy = "dinam")
     private List<Rule> rule;
 

@@ -1,11 +1,12 @@
 package sky.group.homeworkgroup.model.model_dinamicbase;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
-
+@Schema(description = "Модель описание условия при которых продукт может быть предложен клиенту")
 @Entity
 public class Rule {
     @Id
@@ -17,10 +18,18 @@ public class Rule {
     private String query;
     private List<String> arguments;
     private Boolean negate;
+    @Schema(description = "Модель анализа данных по статистике использования данного совета")
     @Embedded
     private Statistic statistic;
 
     public Rule() {
+    }
+
+    public Rule(Long id, String query, List<String> arguments, Boolean negate) {
+        this.id = id;
+        this.query = query;
+        this.arguments = arguments;
+        this.negate = negate;
     }
 
     @Override
@@ -78,7 +87,7 @@ public class Rule {
 
     @Override
     public String toString() {
-        return "Rule{" +
+        return "{" +
                 "id=" + id +
                 ", query='" + query + '\'' +
                 ", arguments=" + arguments +

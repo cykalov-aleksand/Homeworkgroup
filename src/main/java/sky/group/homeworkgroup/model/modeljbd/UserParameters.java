@@ -1,7 +1,9 @@
 package sky.group.homeworkgroup.model.modeljbd;
 
-import java.util.UUID;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.UUID;
+@Schema(description = "Модель данных клиента представляемая внешнему пользователю, полученных  с базы данных")
 public class UserParameters {
     private UUID id;
     private String firstName;

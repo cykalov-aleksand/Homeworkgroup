@@ -1,6 +1,8 @@
 package sky.group.homeworkgroup.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dinamic")
+@Tag(name = "Контроллер dinamic ", description = "Предназначен для работы с предлагаемыми продуктами (вывод информации, удаление, добавление)")
 public class DinamicController {
     private final DinamicService dinamicService;
 
@@ -21,7 +24,7 @@ public class DinamicController {
 
     @DeleteMapping("{id}")
     @Operation(summary = "Проводим удаление рекомендаций по заданному id продукта")
-    public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRule(@PathVariable @Parameter(description = "удаляемого продукта",required = true)Long id) {
         dinamicService.deleteRule(id);
         return ResponseEntity.status(204).build();
     }
