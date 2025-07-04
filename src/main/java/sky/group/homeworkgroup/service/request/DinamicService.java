@@ -1,11 +1,6 @@
 package sky.group.homeworkgroup.service.request;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
-
-import sky.group.homeworkgroup.model.InfoBuild;
 import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 import sky.group.homeworkgroup.repository.dynamic.DinamicReposytory;
 import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
@@ -22,16 +17,11 @@ public class DinamicService {
 
     private final DinamicReposytory dinamicRepository;
     private final RuleRepository ruleRepository;
-  private final BuildProperties buildProperties;
 
-    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository, BuildProperties buildProperties) {
+    public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
-        this.buildProperties = buildProperties;
-    }
-
-    Logger logger = LoggerFactory.getLogger(DinamicService.class);
-
+           }
 
     public void deleteRule(Long id) {
         ruleRepository.deleteLineAllRule(id);
@@ -50,9 +40,6 @@ public class DinamicService {
     public List<Dinamic> allAdvice() {
         return dinamicRepository.find();
     }
-    public InfoBuild info() {
-        return new InfoBuild("request/DinamicService", buildProperties.getVersion());
     }
-}
 
 
