@@ -1,0 +1,7 @@
+            // Generated from Java method: sky.group.homeworkgroup.controller.ControllerServiceClient.getRecommendations
+            // This is an experimental feature. Please report issues to https://github.com/ZenUml/jetbrains-zenuml/discussions
+            
+            ControllerServiceClient.getRecommendations(user_Id) {
+  return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)))
+  ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)))
+}
