@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
+/**
+ * Класс, позволяющий организовать взаимодействие с базой данных H2.
+ */
 @Configuration
 public class DataSourceConfiguration {
     /**

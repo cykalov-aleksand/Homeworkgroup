@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Класс, методы которого производят анализ динамических данных представляемых классом DinamicClientService.
+ */
 @Component
 public class LogicDinamic {
     private final ProjectRepository projectRepository;

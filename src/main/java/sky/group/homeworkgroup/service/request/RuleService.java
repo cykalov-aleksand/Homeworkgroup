@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс, методы которого позволяют произвести считывания и удаления информации по условиям предоставления услуг по заданному продукту.
+ */
 @Service
 public class RuleService {
     private final RuleRepository ruleRepository;
@@ -18,7 +21,7 @@ public class RuleService {
     public RuleService(RuleRepository ruleRepository, DinamicReposytory dinamicReposytory) {
         this.ruleRepository = ruleRepository;
         this.dinamicReposytory = dinamicReposytory;
-           }
+    }
 
     public List<Rule> allAdvice(Long idProduct) {
         Map<Long, List<Rule>> mapRule = new HashMap<>();
@@ -37,7 +40,8 @@ public class RuleService {
         }
         return "рекомендация с id=" + idRule + " не принадлежит продукту с Id= " + idRule;
     }
-    public List<Statistic>listStatic(){
+
+    public List<Statistic> listStatic() {
         return ruleRepository.findCount();
     }
-   }
+}

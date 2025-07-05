@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Класс, методы которого производят анализ статических данных представляемых классом ClientService.
+ */
 @Component
 public class Logic {
     private final ProjectRepository projectRepository;
@@ -16,6 +19,7 @@ public class Logic {
     public Logic(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
+
     /**
      * Производим анализ соответствия данных клиента с указанным id данным указанным в условии задачи
      */

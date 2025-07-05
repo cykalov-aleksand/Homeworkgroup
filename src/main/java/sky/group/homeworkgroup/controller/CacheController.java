@@ -17,7 +17,6 @@ import sky.group.homeworkgroup.service.CacheService;
 public class CacheController {
     private final CacheService cacheService;
 
-
     public CacheController(CacheService cacheService) {
         this.cacheService = cacheService;
     }

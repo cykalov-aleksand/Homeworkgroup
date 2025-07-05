@@ -9,6 +9,9 @@ import sky.group.homeworkgroup.model.InfoBuild;
 
 import java.util.Objects;
 
+/**
+ * Класс, метод которого позволяет управлять кэш памятью и считывать информацию о состоянии данного сервиса (имя, версия).
+ */
 @Service
 public class CacheService {
     private final CacheManager cacheManager;

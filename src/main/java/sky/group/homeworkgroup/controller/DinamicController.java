@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dinamic")
-@Tag(name = "Контроллер dinamic ", description = "Предназначен для работы с предлагаемыми продуктами (вывод информации, удаление, добавление)")
+@Tag(name = "Контроллер Dinamic ", description = "Предназначен для работы с предлагаемыми продуктами (вывод информации, удаление, добавление)")
 public class DinamicController {
     private final DinamicService dinamicService;
 
@@ -24,7 +24,7 @@ public class DinamicController {
 
     @DeleteMapping("{id}")
     @Operation(summary = "Проводим удаление рекомендаций по заданному id продукта")
-    public ResponseEntity<Void> deleteRule(@PathVariable @Parameter(description = "удаляемого продукта",required = true)Long id) {
+    public ResponseEntity<Void> deleteRule(@PathVariable @Parameter(description = "удаляемого продукта", required = true) Long id) {
         dinamicService.deleteRule(id);
         return ResponseEntity.status(204).build();
     }

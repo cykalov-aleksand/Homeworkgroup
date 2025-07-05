@@ -8,9 +8,11 @@ import sky.group.homeworkgroup.repository.dynamic.RuleRepository;
 import sky.group.homeworkgroup.model.model_dinamicbase.Rule;
 
 
-
 import java.util.List;
 
+/**
+ * Класс, методы которого позволяют произвести запись, считывания и удаления информации по предлагаемому продукту.
+ */
 
 @Service
 public class DinamicService {
@@ -21,7 +23,7 @@ public class DinamicService {
     public DinamicService(DinamicReposytory dinamicRepository, RuleRepository ruleRepository) {
         this.dinamicRepository = dinamicRepository;
         this.ruleRepository = ruleRepository;
-           }
+    }
 
     public void deleteRule(Long id) {
         ruleRepository.deleteLineAllRule(id);
@@ -32,7 +34,7 @@ public class DinamicService {
         Dinamic dinamic = dinamicRepository.save(argument);
         for (Rule variable : dinamic.getRule()) {
             ruleRepository.saveRule(variable.getArguments(), variable.getNegate(), variable.getQuery(), argument.getId());
-                   }
+        }
         ruleRepository.saveRuleCount(argument.getId());
         return dinamic;
     }
@@ -40,6 +42,6 @@ public class DinamicService {
     public List<Dinamic> allAdvice() {
         return dinamicRepository.find();
     }
-    }
+}
 
 

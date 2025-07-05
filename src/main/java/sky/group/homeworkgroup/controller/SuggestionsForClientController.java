@@ -30,7 +30,7 @@ public class SuggestionsForClientController {
     @GetMapping("{user_Id}")
     @Operation(summary = "Вводим id клиента")
     public ResponseEntity<Optional<List<OutputData>>> getRecommendations(@PathVariable @Parameter(description = "клиента",
-            required = true)UUID user_Id) {
+            required = true) UUID user_Id) {
         return ResponseEntity.ok(Optional.of(serviceClients.searchForRecommendations(user_Id)));
     }
 
@@ -43,7 +43,7 @@ public class SuggestionsForClientController {
 
     @GetMapping("/username/{userName}")
     @Operation(summary = "Вводим username клиента для динамического анализа")
-    public ResponseEntity<UserParameters> listLastFirstName(@PathVariable @Parameter(description = "клиента",required = true)String userName) {
+    public ResponseEntity<UserParameters> listLastFirstName(@PathVariable @Parameter(description = "клиента", required = true) String userName) {
         return dinamicClientService.listLastFirstName(userName);
     }
 

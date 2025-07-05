@@ -16,6 +16,10 @@ public class ClientService {
 
     private final Logic logic;
 
+    /**
+     * Класс, с помощью методов которого организована логика работы по проведению статического анализа информации по
+     * заданному клиенту и отправки данной информации в контроллер.
+     */
     public ClientService(Logic logic) {
         this.logic = logic;
     }

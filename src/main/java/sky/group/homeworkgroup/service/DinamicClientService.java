@@ -21,6 +21,10 @@ public class DinamicClientService {
     private final LogicDinamic logicDinamic;
     private final ProjectRepository projectRepository;
 
+    /**
+     * Класс, с помощью методов которого организована логика работы по проведению динамического анализа информации по
+     * заданному клиенту и отправки данной информации в контроллер.
+     */
     public DinamicClientService(DinamicReposytory dinamicReposytory, RuleRepository ruleRepository,
                                 LogicDinamic logicDinamic, ProjectRepository projectRepository) {
         this.dinamicReposytory = dinamicReposytory;
@@ -63,11 +67,10 @@ public class DinamicClientService {
 
     public ResponseEntity<UserParameters> listLastFirstName(String userName) {
         if (projectRepository.countUserName(userName) != 1) {
-           throw new WhenNumberNotEqualOne();
+            throw new WhenNumberNotEqualOne();
         }
         UserParameters userParameters = projectRepository.findUserParameters(userName);
         searchForRecommendationsDinamic(userParameters.getId());
         return ResponseEntity.ok().body(userParameters);
     }
-
 }

@@ -16,6 +16,9 @@ import sky.group.homeworkgroup.model.model_dinamicbase.Dinamic;
 
 import javax.sql.DataSource;
 
+/**
+ * Класс, позволяющий организовать взаимодействие с базой данных PostgreSql.
+ */
 @EnableJpaRepositories(
         entityManagerFactoryRef = "bookingEntityManager",
         transactionManagerRef = "bookingTransactionManager",
