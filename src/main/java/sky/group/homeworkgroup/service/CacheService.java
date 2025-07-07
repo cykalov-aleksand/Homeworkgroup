@@ -38,4 +38,5 @@ public class CacheService {
         logger.info("Кеш {} очищен", cacheManager.getCacheNames());
         cacheManager.getCacheNames().forEach(cacheName -> Objects.requireNonNull(cacheManager.getCache(cacheName)).clear());
     }
+
 }
