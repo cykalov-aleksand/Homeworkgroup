@@ -43,5 +43,3 @@ public class DinamicService {
         return dinamicRepository.find();
     }
 }
-
-
