@@ -1,0 +1,12 @@
+            // Generated from Java method: sky.group.homeworkgroup.service.ServiceClient.searchForRecommendations
+            // This is an experimental feature. Please report issues to https://github.com/ZenUml/jetbrains-zenuml/discussions
+            
+            ServiceClient.searchForRecommendations(id) {
+  Map recommendedProducts = new HashMap<>()
+  new HashMap()
+  recommendedProducts.put(UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a"), new OutputData())
+  recommendedProducts.put(UUID.fromString("59efc529-2fff-41af-baff-90ccd7402925"), new OutputData())
+  recommendedProducts.put(UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"), new OutputData())
+  return logic.analise(id).stream().map(recommendedProducts::get).toList()
+  logic.analise(id).stream().map(recommendedProducts::get).toList()
+}
